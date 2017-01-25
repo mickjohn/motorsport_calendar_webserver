@@ -23,8 +23,6 @@ fn index() -> NamedFile {
 fn template() -> Template {
     let mut context = HashMap::new();
     context.insert("events", make_api_request());
-    // let context = make_api_request();
-    // let event = &context[0];
     Template::render("index", &context)
 }
 
@@ -45,5 +43,7 @@ fn main() {
 
 fn make_api_request() -> Vec<Event> {
     let s = include_str!("res.json");
-    serde_json::from_str(s).unwrap()
+    let mut events: Vec<Event> = serde_json::from_str(s).unwrap();
+    events.sort_by(|a,b| a.start_date.cmp(&b.start_date));
+    events
 }

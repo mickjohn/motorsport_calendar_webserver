@@ -17,8 +17,8 @@
     {% for event in events %}
     </tr>
       <td>{{ event.sport }}</td>
-      <td>{{ event.country }},{{event.location}}</td>
-      <td> TBD </td>
+      <td>{{ event.country }}, {{ event.location }}</td>
+      <td>{{ event.start_date | replace(from="T00:00:00Z", to="") }} to {{ event.end_date | replace(from="T00:00:00Z", to="") }} </td>
     </tr>
     {% endfor %}
   </table>
