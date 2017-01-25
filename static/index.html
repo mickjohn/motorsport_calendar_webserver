@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="static/style.css">
+<script src="https://code.jquery.com/jquery-1.7.2.js"></script>
+<script src="static/script.js"></script>
+</head>
+<body>
+
+<h1>Upcoming Motorsport Events</h1>
+<div class="content">
+  <table class="events_table" id="events_table">
+    <tr>
+      <th>Sport</th>
+      <th>Location</th>
+      <th>Dates</th>
+    </tr>
+    <tr>
+      <td>Formula 1</td>
+      <td>Australia, Melbourne</td>
+      <td>23-26 March</td>
+    </tr>
+    <tr>
+      <td>Formula 1</td>
+      <td>Singapore, qwerty track</td>
+      <td>6-8 April</td>
+    </tr>
+    <tr>
+      <td>DTM</td>
+      <td>Germany, Hockenheim</td>
+      <td>6-8 May</td>
+    </tr>
+  </table>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 1')">Formula 1</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 3')">Formula 3</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'DTM')">DTM</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP2')">GP2</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP3')">GP3</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="static/style.css">
+<script src="https://code.jquery.com/jquery-1.7.2.js"></script>
+<script src="static/script.js"></script>
+</head>
+<body>
+
+<h1>Upcoming Motorsport Events</h1>
+<div class="content">
+  <table class="events_table" id="events_table">
+    <tr>
+      <th>Sport</th>
+      <th>Location</th>
+      <th>Dates</th>
+    {% for event in events %}
+    </tr>
+      <td>{{ event.sport }}</td>
+      <td>{{ event.country }},{{event.location}}</td>
+      <td> TBD </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 1')">Formula 1</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 3')">Formula 3</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'DTM')">DTM</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP2')">GP2</a>
+  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP3')">GP3</a>
+</div>
+
+</body>
+</html>
