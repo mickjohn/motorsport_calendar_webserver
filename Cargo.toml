@@ -4,8 +4,8 @@ version = "0.1.0"
 authors = ["Michael Ashe <mickjohnashe@hotmail.com>"]
 
 [dependencies]
-rocket = "0.1.5"
-rocket_codegen = "0.1.5"
+rocket = "0.1.6"
+rocket_codegen = "0.1.6"
 log = "0.3"
 env_logger = "0.3"
 serde = "0.8"
@@ -13,9 +13,11 @@ serde_derive = "0.8"
 serde_yaml = "0.5"
 serde_json = "0.8"
 chrono = { version = "0.2", features = ["serde"] }
+reqwest = "0.3"
+lazy_static = "0.2.2"
 
 [dependencies.rocket_contrib]
-version = "*"
+version = "0.1.6"
 default-features = false
 features = ["tera_templates"]
 
