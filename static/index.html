@@ -2,7 +2,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="static/style.css">
-<!-- <script src="https://code.jquery.com/jquery-1.7.2.js"></script> -->
 <script src="static/script.js"></script>
 </head>
 <body>
@@ -15,31 +14,89 @@
       <th>Location</th>
       <th>Dates</th>
     </tr>
-    <tr>
+    <tr class="event-row" onclick="toggle_sessions('Formula 1-1')">
       <td>Formula 1</td>
       <td>Australia, Melbourne</td>
-      <td>23-26 March</td>
+      <td>2017-03-24 to 2017-03-26 </td>
     </tr>
-    <tr>
+    <tr class="sessions-row-hidden" id="Formula 1-1">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr>
+            <th>Session name</th>
+            <th>Session time</th>
+          </tr>
+          <tr>
+            <td>Free Practice 1</td>
+            <td>10:00am 23 March</td>
+          </tr>
+          <tr>
+            <td>Free Practice 2</td>
+            <td>14:00am 23 March</td>
+          </tr>
+          <tr>
+            <td>Qualifying</td>
+            <td>10:00am 24 March</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
       <td>Formula 1</td>
-      <td>Singapore, qwerty track</td>
-      <td>6-8 April</td>
+      <td>China, Shanghai</td>
+      <td>2017-04-07 to 2017-04-09 </td>
     </tr>
-    <tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
+      <td>Formula 1</td>
+      <td>Bahrain, Sakhir</td>
+      <td>2017-04-14 to 2017-04-16 </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
+      <td>Formula 1</td>
+      <td>Russia, Sochi</td>
+      <td>2017-04-28 to 2017-04-30 </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
       <td>DTM</td>
       <td>Germany, Hockenheim</td>
-      <td>6-8 May</td>
+      <td>2017-05-05 to 2017-05-07 </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
+      <td>Formula 1</td>
+      <td>Spain, Catalunya</td>
+      <td>2017-05-14 to 2017-05-16 </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
+      <td>DTM</td>
+      <td>Germany, Lausitzring</td>
+      <td>2017-05-19 to 2017-05-21 </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
+      <td>Formula 1</td>
+      <td>Monaco, Melbourne</td>
+      <td>2017-05-25 to 2017-05-28 </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
+      <td>Formula 1</td>
+      <td>Canada, Montreal</td>
+      <td>2017-06-09 to 2017-06-11 </td>
+    </tr>
+    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
+      <td>DTM</td>
+      <td>Hungary, Budapest</td>
+      <td>2017-06-16 to 2017-06-18 </td>
     </tr>
   </table>
 </div>
 
 <div id="mySidenav" class="sidenav">
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 1')">Formula 1</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 3')">Formula 3</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'DTM')">DTM</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP2')">GP2</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP3')">GP3</a>
+  <h2 id="filter_heading"> FILTERS </h2>
 </div>
+
+<script>
+// init
+generate_filter_buttons();
+</script>
 
 </body>
 </html>

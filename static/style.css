@@ -19,34 +19,82 @@ h1, h2, strong {
   color: #2d2d2d;
 }
 
-table {
+.events_table {
+  padding: 30px;
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-.events_table {
-  padding: 30px;
-}
+/* .events_table td, th { */
+/*   border: 1px solid #dddddd; */
+/*   text-align: left; */
+/*   padding: 8px; */
+/* } */
 
-td, th {
+.events_table_heading {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
-  background-color: #efefef;
+.events_table_row_arrow {
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  border-right: 0px;
+  text-align: center;
+  /* padding: 8px; */
 }
 
-tr:nth-child(odd) {
+.events_table_data {
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-left: 0px;
+  text-align: left;
+  padding: 8px;
+}
+
+.events_table_row {
   background-color: #ffffff;
 }
 
-td, th {
+.events_table_row:hover {
+  background-color: #efefef;
+}  
+
+.sessions_table {
+  padding: 30px;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+}
+
+.sessions-row {
+  display: table-row;
+  /* background-color: #bd4646; */
+}
+.sessions-row-hidden {
+  display: none;
+}
+
+.sessions_table_data {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+.sessions_table_header {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.sessions_table_row {
+  background-color: #ffffff;
 }
 
 /* The side navigation menu */
@@ -91,8 +139,8 @@ td, th {
   margin: 10px 20px 10px 20px;
   border: 2px solid;
   color: #ededed;
-  border-radius: 7px;
-  border-color: #ea6262;
+  border-radius: 2px;
+  border-color: #bd4646;
 }
 
 @media screen and (max-width: 600px) {
@@ -109,4 +157,11 @@ td, th {
 .filter-button-off {
   background-color: #111;
   color: #bd4646;
+}
+
+#filter_heading {
+  margin: 0px 20px 10px 20px;
+  border-bottom: 2px solid;
+  color: #ededed;
+  border-color: #ededed;
 }

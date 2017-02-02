@@ -9,27 +9,46 @@
 <h1>Upcoming Motorsport Events</h1>
 <div class="content">
   <table class="events_table" id="events_table">
-    <tr>
-      <th>Sport</th>
-      <th>Location</th>
-      <th>Dates</th>
-    {% for event in events %}
+    <tr class="events_table_row" >
+      <th class="events_table_heading" colspan="2" >Sport</th>
+      <th class="events_table_heading" >Location</th>
+      <th class="events_table_heading" >Dates</th>
     </tr>
-      <td>{{ event.sport }}</td>
-      <td>{{ event.country }}, {{ event.location }}</td>
-      <td>{{ event.start_date | replace(from="T00:00:00Z", to="") }} to {{ event.end_date | replace(from="T00:00:00Z", to="") }} </td>
+    {% for event in events %}
+    <tr class="events_table_row" onclick="toggle_sessions(this, '{{event.sport}}-{{event.round}}')">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >{{ event.sport }}</td>
+      <td class="events_table_data" >{{ event.country }}, {{ event.location }}</td>
+      <td class="events_table_data" >{{ event.start_date | replace(from="T00:00:00Z", to="") }} to {{ event.end_date | replace(from="T00:00:00Z", to="") }} </td>
+    </tr>
+    <tr class="sessions-row-hidden" id="{{event.sport}}-{{event.round}}">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">Session time</th>
+          </tr>
+          {% for session in event.sessions %}
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">{{ session.name }}</td>
+            <td class="sessions_table_data">TBD</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </td>
     </tr>
     {% endfor %}
   </table>
 </div>
 
 <div id="mySidenav" class="sidenav">
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 1')">Formula 1</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'Formula 3')">Formula 3</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'DTM')">DTM</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP2')">GP2</a>
-  <a href="#" class="filter-button filter-button-on" onclick="toggle_button_clicked(this, 'GP3')">GP3</a>
+  <h2 id="filter_heading"> FILTERS </h2>
 </div>
+
+<script>
+// init
+generate_filter_buttons();
+</script>
 
 </body>
 </html>

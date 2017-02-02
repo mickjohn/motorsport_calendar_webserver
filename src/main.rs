@@ -11,6 +11,7 @@ extern crate rocket_contrib;
 extern crate motorsport_calendar_common;
 #[macro_use] extern crate lazy_static;
 extern crate reqwest;
+extern crate chrono;
 
 mod config;
 mod webserver;
