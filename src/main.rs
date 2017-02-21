@@ -3,18 +3,22 @@
 
 #[macro_use] extern crate log;
 extern crate env_logger;
+extern crate serde;
 #[macro_use] extern crate serde_derive;
 extern crate serde_json;
 extern crate serde_yaml;
-#[macro_use] extern crate rocket;
-extern crate rocket_contrib;
+extern crate rocket;
 extern crate motorsport_calendar_common;
 #[macro_use] extern crate lazy_static;
 extern crate reqwest;
 extern crate chrono;
+#[macro_use] extern crate tera;
+extern crate hyper;
 
 mod config;
 mod webserver;
+mod templates;
+mod utils;
 
 use config::Config;
 
