@@ -3,10 +3,28 @@
 <head>
 <link rel="stylesheet" href="static/style.css">
 <script src="static/script.js"></script>
+<link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="static/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="static/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="static/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="static/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="static/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="static/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="static/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="static/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="static/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+<link rel="manifest" href="/static/faviconmanifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="static/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
 </head>
 <body>
 
-<h1>Upcoming Motorsport Events</h1>
+<button id="nav-button" onclick="toggle_side_nav()" >NAV</button>
+<h1 style="text-align: center">Upcoming Motorsport Events</h1>
 <div class="content">
   <table class="events_table" id="events_table">
     <tr class="events_table_row" >
@@ -15,23 +33,24 @@
       <th class="events_table_heading" >Dates</th>
     </tr>
     {% for event in events %}
-    <tr class="events_table_row" onclick="toggle_sessions(this, '{{event.sport}}-{{event.round}}')">
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
       <td class="events_table_row_arrow" >&#x25BA;</td>
       <td class="events_table_data" >{{ event.sport }}</td>
       <td class="events_table_data" >{{ event.country }}, {{ event.location }}</td>
-      <td class="events_table_data" >{{ event.start_date | replace(from="T00:00:00Z", to="") }} to {{ event.end_date | replace(from="T00:00:00Z", to="") }} </td>
+      <td class="events_table_data" >{{ event | event_date_range }} </td>
     </tr>
-    <tr class="sessions-row-hidden" id="{{event.sport}}-{{event.round}}">
+    <!-- <tr class="sessions-row-hidden" id="{{event.sport}}-{{event.round}}"> -->
+    <tr class="sessions-row-hidden">
       <td colspan="3">
         <table class="sessions_table">
           <tr class="sessions_table_row">
             <th class="sessions_table_header">Session name</th>
-            <th class="sessions_table_header">Session time</th>
+            <th class="sessions_table_header">time</th>
           </tr>
           {% for session in event.sessions %}
           <tr class="sessions_table_row">
             <td class="sessions_table_data">{{ session.name }}</td>
-            <td class="sessions_table_data">TBD</td>
+            <td class="sessions_table_data">{{ session | session_date }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -43,12 +62,9 @@
 
 <div id="mySidenav" class="sidenav">
   <h2 id="filter_heading"> FILTERS </h2>
+  {% for sport_type in sport_types %}
+  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
+  {% endfor %}
 </div>
-
-<script>
-// init
-generate_filter_buttons();
-</script>
-
 </body>
 </html>

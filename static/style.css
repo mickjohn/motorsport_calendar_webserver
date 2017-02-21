@@ -3,15 +3,17 @@ html {
   background-color: #e0e0e0;
 }
 
-body {
-  margin: 0 20px 0 220px;
-  font-family: "Helvetica", "Arial", sans-serif;
-  color: #2d2d2d;
+@media only screen {
+  body {
+    margin: 0 20px 0 220px;
+    font-family: "Helvetica", "Arial", sans-serif;
+    color: #2d2d2d;
+  }
 }
 
-@media screen and (max-width: 600px) {
+@media only screen and (max-width: 1023px) {
   body {
-    margin: 130px 20px 0 20px;
+    margin: 0 20px 0 20px;
   }
 }
 
@@ -26,12 +28,6 @@ h1, h2, strong {
   width: 100%;
 }
 
-/* .events_table td, th { */
-/*   border: 1px solid #dddddd; */
-/*   text-align: left; */
-/*   padding: 8px; */
-/* } */
-
 .events_table_heading {
   border: 1px solid #dddddd;
   text-align: left;
@@ -42,16 +38,15 @@ h1, h2, strong {
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
   border-left: 1px solid #dddddd;
-  border-right: 0px;
+  border-right: 0;
   text-align: center;
-  /* padding: 8px; */
 }
 
 .events_table_data {
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
-  border-left: 0px;
+  border-left: 0;
   text-align: left;
   padding: 8px;
 }
@@ -64,6 +59,7 @@ h1, h2, strong {
   background-color: #efefef;
 }  
 
+/* for the sessions table*/
 .sessions_table {
   padding: 30px;
   margin-left: 40px;
@@ -73,50 +69,50 @@ h1, h2, strong {
   width: 70%;
 }
 
+/* The row in the events table that contains the hidden sessions table*/
 .sessions-row {
   display: table-row;
-  /* background-color: #bd4646; */
 }
 .sessions-row-hidden {
   display: none;
 }
 
+/* for td inside sessions table */
 .sessions_table_data {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
+/* for th inside sessions table */
 .sessions_table_header {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
+/* for tr inside sessions table */
 .sessions_table_row {
   background-color: #ffffff;
 }
 
 /* The side navigation menu */
-.sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  padding-top: 60px;
+@media only screen {
+  .sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    padding-top: 60px;
+  }
 }
 
-@media screen and (max-width: 600px) {
+@media only screen and (max-width: 1023px) {
   .sidenav {
-    height: 50px;
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    overflow-x: hidden;
+    display: none;
   }
 }
 
@@ -128,11 +124,11 @@ h1, h2, strong {
   display: block;
 }
 
-@media screen and (max-width: 600px) {
-  .sidenav a {
-    padding: 8px 8px 8px 8px;
-    display: inline-block;
-  }
+.sidenav_hidden {
+  display: none;
+}
+
+.sidenav_mobile {
 }
 
 .filter-button {
@@ -141,13 +137,6 @@ h1, h2, strong {
   color: #ededed;
   border-radius: 2px;
   border-color: #bd4646;
-}
-
-@media screen and (max-width: 600px) {
-  .filter-button {
-    margin: 2px 2px 2px 2px;
-    border-radius: 0px;
-  }
 }
 
 .filter-button-on {
@@ -159,9 +148,24 @@ h1, h2, strong {
   color: #bd4646;
 }
 
+.close-side-nav {
+}
+
 #filter_heading {
-  margin: 0px 20px 10px 20px;
+  margin: 0 20px 10px 20px;
   border-bottom: 2px solid;
   color: #ededed;
   border-color: #ededed;
+}
+
+@media only screen {
+  #nav-button {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  #nav-button {
+    display: inline-block;
+  }
 }
