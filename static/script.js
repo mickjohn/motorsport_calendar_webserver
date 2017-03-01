@@ -86,7 +86,7 @@ function filter_table(query, hide) {
           /* If the sessions for this row are expanded, hide them */
           /* First get the 'session_row'. This is the current row + 1 */
           var session_row = table_rows[current_row.rowIndex + 1];
-          /* We also need set the triangle*/
+          /* We also need set the triangle */
           set_event_row_triangle(current_row, globals.right_triangle);
           /* Then hide the session row */
           hide_session_row(session_row);

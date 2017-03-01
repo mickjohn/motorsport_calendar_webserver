@@ -3,100 +3,1015 @@
 <head>
 <link rel="stylesheet" href="static/style.css">
 <script src="static/script.js"></script>
+<link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="static/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="static/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="static/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="static/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="static/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="static/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="static/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="static/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="static/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+<link rel="manifest" href="/static/faviconmanifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="static/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
 </head>
 <body>
 
-<h1>Upcoming Motorsport Events</h1>
+<button id="nav-button" onclick="toggle_side_nav()" >NAV</button>
+<h1 style="text-align: center">Upcoming Motorsport Events</h1>
 <div class="content">
   <table class="events_table" id="events_table">
-    <tr>
-      <th>Sport</th>
-      <th>Location</th>
-      <th>Dates</th>
+    <tr class="events_table_row" >
+      <th class="events_table_heading" colspan="2" >Sport</th>
+      <th class="events_table_heading" >Location</th>
+      <th class="events_table_heading" >Dates</th>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('Formula 1-1')">
-      <td>Formula 1</td>
-      <td>Australia, Melbourne</td>
-      <td>2017-03-24 to 2017-03-26 </td>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Australia</b>, Melbourne</td>
+      <td class="events_table_data" >24-26, March </td>
     </tr>
-    <tr class="sessions-row-hidden" id="Formula 1-1">
+    <tr class="sessions-row-hidden">
       <td colspan="3">
         <table class="sessions_table">
-          <tr>
-            <th>Session name</th>
-            <th>Session time</th>
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
           </tr>
-          <tr>
-            <td>Free Practice 1</td>
-            <td>10:00am 23 March</td>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
           </tr>
-          <tr>
-            <td>Free Practice 2</td>
-            <td>14:00am 23 March</td>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
           </tr>
-          <tr>
-            <td>Qualifying</td>
-            <td>10:00am 24 March</td>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
           </tr>
         </table>
       </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>Formula 1</td>
-      <td>China, Shanghai</td>
-      <td>2017-04-07 to 2017-04-09 </td>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>China</b>, Shanghai</td>
+      <td class="events_table_data" >07-09, April </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>Formula 1</td>
-      <td>Bahrain, Sakhir</td>
-      <td>2017-04-14 to 2017-04-16 </td>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>Formula 1</td>
-      <td>Russia, Sochi</td>
-      <td>2017-04-28 to 2017-04-30 </td>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Bahrain</b>, Sakhir</td>
+      <td class="events_table_data" >14-16, April </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>DTM</td>
-      <td>Germany, Hockenheim</td>
-      <td>2017-05-05 to 2017-05-07 </td>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>Formula 1</td>
-      <td>Spain, Catalunya</td>
-      <td>2017-05-14 to 2017-05-16 </td>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Russia</b>, Sochi</td>
+      <td class="events_table_data" >28-30, April </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>DTM</td>
-      <td>Germany, Lausitzring</td>
-      <td>2017-05-19 to 2017-05-21 </td>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>Formula 1</td>
-      <td>Monaco, Melbourne</td>
-      <td>2017-05-25 to 2017-05-28 </td>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Germany</b>, Hockenheim</td>
+      <td class="events_table_data" >05-07, May </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>Formula 1</td>
-      <td>Canada, Montreal</td>
-      <td>2017-06-09 to 2017-06-11 </td>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
     </tr>
-    <tr class="event-row" onclick="toggle_sessions('{{event.sport}}-{{event.round}}')">
-      <td>DTM</td>
-      <td>Hungary, Budapest</td>
-      <td>2017-06-16 to 2017-06-18 </td>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Spain</b>, Catalunya</td>
+      <td class="events_table_data" >14-16, May </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Monday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Monday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Tuesday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Germany</b>, Lausitzring</td>
+      <td class="events_table_data" >19-21, May </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Monaco</b>, Melbourne</td>
+      <td class="events_table_data" >25-28, May </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Thursday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Thursday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Canada</b>, Montreal</td>
+      <td class="events_table_data" >09-11, June </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Hungary</b>, Budapest</td>
+      <td class="events_table_data" >16-18, June </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Azerbaijan</b>, Baku</td>
+      <td class="events_table_data" >23-25, June </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Germany</b>, Norisring</td>
+      <td class="events_table_data" >30 June - 02 July </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Austria</b>, Speilberg</td>
+      <td class="events_table_data" >07-09, July </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>England</b>, Silverstone</td>
+      <td class="events_table_data" >14-16, July </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Russia</b>, Moscow Raceway</td>
+      <td class="events_table_data" >21-23, July </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Hungary</b>, Magyar, Nagydij</td>
+      <td class="events_table_data" >28-30, July </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>The Netherlands</b>, Zandvoort</td>
+      <td class="events_table_data" >18-20, August </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Belgium</b>, Spa-Francorchamps</td>
+      <td class="events_table_data" >25-27, August </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Italy</b>, Monza</td>
+      <td class="events_table_data" >01-03, September </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Germany</b>, Nürburgring</td>
+      <td class="events_table_data" >08-10, September </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Singapore</b>, Singapore</td>
+      <td class="events_table_data" >15-17, September </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Austria</b>, Speilberg</td>
+      <td class="events_table_data" >22-24, September </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Malaysia</b>, Kuala Lumpur</td>
+      <td class="events_table_data" >29-25, September </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >DTM</td>
+      <td class="events_table_data" ><b>Germany</b>, Hockenheim</td>
+      <td class="events_table_data" >13-15, October </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Friday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="events_table_row" onclick="toggle_session_row(this)">
+      <td class="events_table_row_arrow" >&#x25BA;</td>
+      <td class="events_table_data" >Formula 1</td>
+      <td class="events_table_data" ><b>Japan</b>, Suzuka</td>
+      <td class="events_table_data" >26-08, October </td>
+    </tr>
+    <tr class="sessions-row-hidden">
+      <td colspan="3">
+        <table class="sessions_table">
+          <tr class="sessions_table_row">
+            <th class="sessions_table_header">Session name</th>
+            <th class="sessions_table_header">time</th>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 1</td>
+            <td class="sessions_table_data">Thursday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 2</td>
+            <td class="sessions_table_data">Thursday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Free Practice 3</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Qualifying</td>
+            <td class="sessions_table_data">Saturday, <i>TBD</i></td>
+          </tr>
+          <tr class="sessions_table_row">
+            <td class="sessions_table_data">Race</td>
+            <td class="sessions_table_data">Sunday, <i>TBD</i></td>
+          </tr>
+        </table>
+      </td>
     </tr>
   </table>
 </div>
 
 <div id="mySidenav" class="sidenav">
   <h2 id="filter_heading"> FILTERS </h2>
+  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">DTM</a>
+  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'Formula 1')">Formula 1</a>
 </div>
-
-<script>
-// init
-generate_filter_buttons();
-</script>
-
 </body>
 </html>
+

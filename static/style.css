@@ -14,6 +14,7 @@ html {
 @media only screen and (max-width: 1023px) {
   body {
     margin: 0 20px 0 20px;
+    font-size: 30px;
   }
 }
 
@@ -49,6 +50,13 @@ h1, h2, strong {
   border-left: 0;
   text-align: left;
   padding: 8px;
+}
+
+@media only screen and (max-width: 1023px) {
+  .events_table_data {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
 .events_table_row {
@@ -169,3 +177,35 @@ h1, h2, strong {
     display: inline-block;
   }
 }
+
+/**************/
+/* CENTRE NAV */
+/**************/
+/* Hide it on full sized screens*/
+#centre_nav {
+  display: none;
+}
+
+/* Show it on mobile screens */
+@media only screen and (max-width: 1023px) {
+  #centre_nav {
+    background-color: #111;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: block;
+  }
+
+  #centre_nav h2 {
+    margin: 0 20px 20px 20px;
+  }
+
+  #centre_nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 18px;
+  }
+}
+

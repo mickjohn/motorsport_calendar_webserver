@@ -23,8 +23,15 @@
 </head>
 <body>
 
-<button id="nav-button" onclick="toggle_side_nav()" >NAV</button>
 <h1 style="text-align: center">Upcoming Motorsport Events</h1>
+<div id="centre_nav">
+  <h2 id="filter_heading"> FILTERS </h2>
+  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">DTM</a>
+  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'Formula 1')">Formula 1</a>
+</div>
+
+<!-- <button id="nav-button" onclick="toggle_side_nav()" >NAV</button> -->
+
 <div class="content">
   <table class="events_table" id="events_table">
     <tr class="events_table_row" >
@@ -36,10 +43,9 @@
     <tr class="events_table_row" onclick="toggle_session_row(this)">
       <td class="events_table_row_arrow" >&#x25BA;</td>
       <td class="events_table_data" >{{ event.sport }}</td>
-      <td class="events_table_data" >{{ event.country }}, {{ event.location }}</td>
+      <td class="events_table_data" ><b>{{ event.country }}</b>, {{ event.location }}</td>
       <td class="events_table_data" >{{ event | event_date_range }} </td>
     </tr>
-    <!-- <tr class="sessions-row-hidden" id="{{event.sport}}-{{event.round}}"> -->
     <tr class="sessions-row-hidden">
       <td colspan="3">
         <table class="sessions_table">
