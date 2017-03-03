@@ -14,7 +14,6 @@ html {
 @media only screen and (max-width: 1023px) {
   body {
     margin: 0 20px 0 20px;
-    /* font-size: 30px; */
   }
 }
 
@@ -71,7 +70,10 @@ h1, h2, strong {
   background-color: #efefef;
 }  
 
-/* for the sessions table*/
+/*************************/
+/* SESSION TABLE AND ROW */
+/*************************/
+
 .sessions_table {
   padding: 30px;
   margin-left: 40px;
@@ -131,13 +133,6 @@ h1, h2, strong {
   }
 }
 
-/* .sidenav_hidden { */
-/*   display: none; */
-/* } */
-
-/* .sidenav_mobile { */
-/* } */
-
 .filter-button {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
@@ -159,9 +154,6 @@ h1, h2, strong {
   color: #bd4646;
 }
 
-.close-side-nav {
-}
-
 .filter_heading {
   margin: 0 20px 10px 20px;
   border-bottom: 2px solid;
@@ -172,6 +164,7 @@ h1, h2, strong {
 /**************/
 /* CENTRE NAV */
 /**************/
+
 /* Hide it on full sized screens*/
 #centre_nav {
   display: none;
@@ -181,8 +174,8 @@ h1, h2, strong {
 @media only screen and (max-width: 1023px) {
   #centre_nav {
     background-color: #111;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 1.9em;
+    margin-bottom: 1.9em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     display: block;
@@ -198,8 +191,8 @@ h1, h2, strong {
   }
 
   .filter-button {
-    padding: 8px 8px 8px 8px;
-    margin: 2px 2px 2px 2px;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    margin: 0.125em 0.125em 0.125em 0.125em;
     float: left;
   }
 }
