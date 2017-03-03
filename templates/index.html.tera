@@ -17,20 +17,25 @@
 <link rel="icon" type="image/png" sizes="96x96" href="static/favicon/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
 <link rel="manifest" href="/static/faviconmanifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="static/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 </head>
-<body>
+<body id="page">
 
 <h1 style="text-align: center">Upcoming Motorsport Events</h1>
 <div id="centre_nav">
-  <h2 id="filter_heading"> FILTERS </h2>
-  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">DTM</a>
-  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'Formula 1')">Formula 1</a>
+  <h2 class="filter_heading"> FILTERS </h2>
+  <div id="centre_nav_filter_buttons">
+    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">DTM</a>
+    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'Formula 1')">Formula 1</a>
+    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">Formula 3</a>
+    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">GP2</a>
+    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">GP3</a>
+    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">Nascar</a>
+  </div>
 </div>
-
-<!-- <button id="nav-button" onclick="toggle_side_nav()" >NAV</button> -->
 
 <div class="content">
   <table class="events_table" id="events_table">
@@ -67,7 +72,7 @@
 </div>
 
 <div id="mySidenav" class="sidenav">
-  <h2 id="filter_heading"> FILTERS </h2>
+  <h2 class="filter_heading"> FILTERS </h2>
   {% for sport_type in sport_types %}
   <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
   {% endfor %}
