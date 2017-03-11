@@ -13,6 +13,13 @@ lazy_static! {
     };
 }
 
+pub fn init_template() -> Tera {
+    let mut tera = compile_templates!("templates/**/*.tera");
+    tera.register_filter("event_date_range", event_date_range_helper);
+    tera.register_filter("session_date", session_date_helper);
+    tera
+}
+
 pub fn event_date_range_helper(value: tera::Value, _: HashMap<String, tera::Value>) -> tera::Result<tera::Value> {
     let event = try_get_value!("event_date_range", "value", Event, value);
     let s = utils::pretty_print_date_range(&event.start_date, &event.end_date);

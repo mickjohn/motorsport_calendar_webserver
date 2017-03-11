@@ -28,12 +28,9 @@
 <div id="centre_nav">
   <h2 class="filter_heading"> FILTERS </h2>
   <div id="centre_nav_filter_buttons">
-    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">DTM</a>
-    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'Formula 1')">Formula 1</a>
-    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">Formula 3</a>
-    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">GP2</a>
-    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">GP3</a>
-    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'DTM')">Nascar</a>
+    {% for sport_type in sport_types %}
+    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
+    {% endfor %}
   </div>
 </div>
 

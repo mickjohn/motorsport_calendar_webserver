@@ -84,7 +84,9 @@ fn render_template() -> Result<String, String>{
     let events = try!(make_api_request());
     context.add("events", &events);
     context.add("sport_types", &get_sport_types(&events));
-    let rendered_template = try!(templates::TERA.render("index.html.tera", context).map_err(|e| e.to_string()));
+    let template = templates::init_template();
+    let rendered_template = try!(template.render("index.html.tera", context).map_err(|e| e.to_string()));
+    // let rendered_template = try!(templates::TERA.render("index.html.tera", context).map_err(|e| e.to_string()));
     Ok(rendered_template)
 }
 
