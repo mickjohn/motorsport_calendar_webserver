@@ -1,1 +1,11 @@
 target
+.vimrc
+Cargo.lock
+TODO
+copy_to_windows.sh
+logs/
+pidfile
+refresh.sh
+run.sh
+package.sh
+static/copy_to_windows.sh
