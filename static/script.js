@@ -1,7 +1,9 @@
 
 var globals = {
-  right_triangle: '&#x25BA',
-  down_triangle: '&#x25BC'
+  // right_triangle: '&#x25BA',
+  // down_triangle: '&#x25BC'
+  right_triangle: '<b>+</b>',
+  down_triangle: '<b>-</b>'
 };
 
 function toggle_button_clicked(button, sport_type) {

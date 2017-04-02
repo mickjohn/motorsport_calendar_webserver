@@ -26,11 +26,15 @@
 
 <h1 style="text-align: center">Upcoming Motorsport Events</h1>
 <div id="centre_nav">
-  <h2 class="filter_heading"> FILTERS </h2>
-  <div id="centre_nav_filter_buttons">
+  <h2 class="side_nav_heading"> FILTERS </h2>
+  <div class="centre_nav_buttons">
     {% for sport_type in sport_types %}
     <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
     {% endfor %}
+  </div>
+  <h2 class="side_nav_heading"> LINKS </h2>
+  <div class="centre_nav_buttons">
+    <a class="side_link" href="static/about.html"><h3> ABOUT </h3></a>
   </div>
 </div>
 
@@ -43,10 +47,10 @@
     </tr>
     {% for event in events %}
     <tr class="events_table_row" onclick="toggle_session_row(this)">
-      <td class="events_table_row_arrow" >&#x25BA;</td>
-      <td class="events_table_data" >{{ event.sport }}</td>
-      <td class="events_table_data" ><b>{{ event.country }}</b>, {{ event.location }}</td>
-      <td class="events_table_data" >{{ event | event_date_range }} </td>
+      <td class="events_table_row_arrow"><b>+</b></td>
+      <td class="events_table_data">{{ event.sport }}</td>
+      <td class="events_table_data"><b>{{ event.country }}</b>, {{ event.location }}</td>
+      <td class="events_table_data">{{ event | event_date_range }} </td>
     </tr>
     <tr class="sessions-row-hidden">
       <td colspan="3">
@@ -69,10 +73,12 @@
 </div>
 
 <div id="mySidenav" class="sidenav">
-  <h2 class="filter_heading"> FILTERS </h2>
+  <h2 class="side_nav_heading"> FILTERS </h2>
   {% for sport_type in sport_types %}
   <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
   {% endfor %}
+  <h2 class="side_nav_heading"> LINKS </h2>
+  <a class="side_link" href="static/about.html"><h3> ABOUT </h3></a>
 </div>
 </body>
 </html>

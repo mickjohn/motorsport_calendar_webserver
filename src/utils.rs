@@ -24,7 +24,7 @@ pub fn pretty_print_date_range(from: &DateTime<UTC>, to: &DateTime<UTC>) -> Stri
 pub fn pretty_print_session_date_and_time(date: &DateTime<UTC>, timeoption: &Option<DateTime<Local>>) -> String {
     let day = date.format("%A").to_string();
     if let &Some(time) = timeoption {
-        let hm = time.format("%H%M").to_string();
+        let hm = time.format("%H:%M").to_string();
         format!("{}, {}", day, hm)
     } else {
         format!("{}, <i>TBD</i>", day)

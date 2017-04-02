@@ -11,6 +11,8 @@ use serde_json;
 use templates;
 use hyper::header::ContentType;
 use hyper::mime::{Mime, TopLevel, SubLevel};
+use chrono::prelude::*;
+use chrono::Duration;
 
 #[get("/")]
 fn template() -> Result<content::HTML<String>, RocketError> {
@@ -82,12 +84,19 @@ fn make_api_request() -> Result<Vec<Event>, String> {
 fn render_template() -> Result<String, String>{
     let mut context = Context::new();
     let events = try!(make_api_request());
-    context.add("events", &events);
-    context.add("sport_types", &get_sport_types(&events));
+    // Don't display event's that are over.
+    let events_older_than_yesterday = get_events_older_than_yesterday(events);
+    context.add("events", &events_older_than_yesterday);
+    context.add("sport_types", &get_sport_types(&events_older_than_yesterday));
     let template = templates::init_template();
     let rendered_template = try!(template.render("index.html.tera", context).map_err(|e| e.to_string()));
-    // let rendered_template = try!(templates::TERA.render("index.html.tera", context).map_err(|e| e.to_string()));
     Ok(rendered_template)
+}
+
+fn get_events_older_than_yesterday(events: Vec<Event>) -> Vec<Event> {
+    let now: DateTime<UTC> = UTC::now();
+    let one_day = Duration::seconds(60*60*24);
+    events.into_iter().filter(|x| { x.end_date.signed_duration_since(now) >= one_day }).collect::<Vec<Event>>()
 }
 
 fn get_sport_types(events: &[Event]) -> Vec<&str> {
