@@ -65,6 +65,7 @@ h1, h2, strong {
 
 .events_table_row {
   background-color: #ffffff;
+  cursor: pointer
 }
 
 .events_table_row:hover {
@@ -88,6 +89,7 @@ h1, h2, strong {
 .sessions-row {
   display: table-row;
 }
+
 .sessions-row-hidden {
   display: none;
 }
@@ -110,6 +112,10 @@ h1, h2, strong {
 .sessions_table_row {
   background-color: #ffffff;
 }
+
+.sessions_table_row:hover {
+  background-color: #efefef;
+}  
 
 /**********/
 /*SIDE NAV*/

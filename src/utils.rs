@@ -1,4 +1,4 @@
-use chrono::{DateTime, UTC, Datelike, Local};
+use chrono::{DateTime, UTC, Datelike, Local, FixedOffset};
 
 pub fn pretty_print_date_range(from: &DateTime<UTC>, to: &DateTime<UTC>) -> String {
     if from.month() == to.month() {
@@ -25,6 +25,22 @@ pub fn pretty_print_session_date_and_time(date: &DateTime<UTC>, timeoption: &Opt
     let day = date.format("%A").to_string();
     if let &Some(time) = timeoption {
         let hm = time.format("%H:%M").to_string();
+        format!("{}, {}", day, hm)
+    } else {
+        format!("{}, <i>TBD</i>", day)
+    }
+}
+
+pub fn pretty_print_session_date_and_time_with_offset(date: &DateTime<UTC>, timeoption: &Option<DateTime<Local>>, offset: &i32) -> String {
+    let day = date.format("%A").to_string();
+    if let &Some(time) = timeoption {
+        let fs = if *offset >= 0 {
+            FixedOffset::east(*offset)
+        } else {
+            FixedOffset::west(*offset)
+        };
+        let new_time = time.with_timezone(&fs);
+        let hm = new_time.format("%H:%M").to_string();
         format!("{}, {}", day, hm)
     } else {
         format!("{}, <i>TBD</i>", day)

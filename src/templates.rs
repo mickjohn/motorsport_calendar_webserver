@@ -3,10 +3,13 @@ use tera;
 use tera::Tera;
 use motorsport_calendar_common::event::*;
 use std::collections::HashMap;
+use config;
 
 lazy_static! {
     pub static ref TERA: Tera = {
-        let mut tera = compile_templates!("templates/**/*.tera");
+        let config = config::global::CONFIG.read().unwrap();
+        let templates = format!("{}/**/*.tera", config.template_directory);
+        let mut tera = compile_templates!(&templates);
         tera.register_filter("event_date_range", event_date_range_helper);
         tera.register_filter("session_date", session_date_helper);
         tera
@@ -14,7 +17,9 @@ lazy_static! {
 }
 
 pub fn init_template() -> Tera {
-    let mut tera = compile_templates!("templates/**/*.tera");
+    let config = config::global::CONFIG.read().unwrap();
+    let templates = format!("{}/**/*.tera", config.template_directory);
+    let mut tera = compile_templates!(&templates);
     tera.register_filter("event_date_range", event_date_range_helper);
     tera.register_filter("session_date", session_date_helper);
     tera
@@ -26,8 +31,20 @@ pub fn event_date_range_helper(value: tera::Value, _: HashMap<String, tera::Valu
     Ok(tera::to_value(&s).unwrap())
 }
 
-pub fn session_date_helper(value: tera::Value, _: HashMap<String, tera::Value>) -> tera::Result<tera::Value> {
+pub fn session_date_helper(value: tera::Value, params: HashMap<String, tera::Value>) -> tera::Result<tera::Value> {
     let session = try_get_value!("session_date", "value", Session, value);
-    let s = utils::pretty_print_session_date_and_time(&session.date, &session.time);
+    let s = if let Some(offset) = params.get("utc_offset") {
+        let o = match offset {
+            &tera::Value::Number(ref x) => Some(x.as_i64().unwrap() as i32),
+            _ => None,
+        };
+        if let Some(i32_offset) = o {
+            utils::pretty_print_session_date_and_time_with_offset(&session.date, &session.time, &i32_offset)
+        } else {
+            utils::pretty_print_session_date_and_time(&session.date, &session.time)
+        }
+    } else {
+        utils::pretty_print_session_date_and_time(&session.date, &session.time)
+    };
     Ok(tera::to_value(&s).unwrap())
 }

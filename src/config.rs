@@ -5,6 +5,8 @@ use serde_yaml;
 #[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
 pub struct Config {
     pub api_url: String,
+    pub static_content_dir: String,
+    pub template_directory: String,
 }
 
 impl Config {
@@ -22,7 +24,11 @@ pub mod global {
     use std::sync::RwLock;
 
     lazy_static! {
-        pub static ref CONFIG: RwLock<Config> = RwLock::new(Config{api_url: "".to_string()});
+        pub static ref CONFIG: RwLock<Config> = RwLock::new(Config {
+            api_url: "".to_string(),
+            static_content_dir: "static".to_string(),
+            template_directory: "templates".to_string(),
+        });
     }
 }
 

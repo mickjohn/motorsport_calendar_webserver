@@ -14,10 +14,27 @@ use hyper::mime::{Mime, TopLevel, SubLevel};
 use chrono::prelude::*;
 use chrono::Duration;
 
+#[derive(FromForm)]
+struct UtcOffsetSeconds {
+    offset: i32
+}
+
 #[get("/")]
 fn template() -> Result<content::HTML<String>, RocketError> {
-    //If there's an error map it to RocketError::Internal to trigger 500 catcher
-    match render_template() {
+    let now: DateTime<Local> = Local::now();
+    let offset = now.offset().fix().utc_minus_local();
+    match render_template(offset) {
+        Ok(rendered) => Ok(content::HTML(rendered)),
+        Err(e) => {
+            envlog_error!("Error getting events from API: '{}'", e); 
+            Err(RocketError::Internal)
+        },
+    }
+}
+
+#[get("/?<offset>")]
+fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::HTML<String>, RocketError> {
+    match render_template(offset.offset) {
         Ok(rendered) => Ok(content::HTML(rendered)),
         Err(e) => {
             envlog_error!("Error getting events from API: '{}'", e); 
@@ -28,20 +45,23 @@ fn template() -> Result<content::HTML<String>, RocketError> {
 
 #[get("/static/<filename>")]
 fn static_file(filename: &str) -> NamedFile {
-    let fp = format!("static/{}", filename);
+    let config = config::global::CONFIG.read().unwrap();
+    let fp = format!("{}/{}",config.static_content_dir, filename);
     NamedFile::open(&fp).unwrap()
 }
 
 // TODO shouldn't need an extra route for every dir.
 #[get("/static/favicon/<filename>")]
 fn favicons(filename: &str) -> NamedFile {
-    let fp = format!("static/favicon/{}", filename);
+    let config = config::global::CONFIG.read().unwrap();
+    let fp = format!("{}/favicon/{}", config.template_directory, filename);
     NamedFile::open(&fp).unwrap()
 }
 
 #[error(500)]
 fn internal_server_error() -> NamedFile {
-    let fp = "static/500error.html";
+    let config = config::global::CONFIG.read().unwrap();
+    let fp = format!("{}/500error.html", config.static_content_dir);
     NamedFile::open(&fp).unwrap()
 }
 
@@ -51,6 +71,7 @@ pub fn run_webserver() {
                static_file,
                favicons,
                template,
+               template_with_offset,
                ])
         .catch(errors![internal_server_error])
         .launch();
@@ -81,13 +102,15 @@ fn make_api_request() -> Result<Vec<Event>, String> {
     Ok(events)
 }
 
-fn render_template() -> Result<String, String>{
+fn render_template(offset: i32) -> Result<String, String>{
     let mut context = Context::new();
     let events = try!(make_api_request());
-    // Don't display event's that are over.
+    // Don't display event's that are over a day old.
     let events_older_than_yesterday = get_events_older_than_yesterday(events);
     context.add("events", &events_older_than_yesterday);
     context.add("sport_types", &get_sport_types(&events_older_than_yesterday));
+    context.add("offset", &offset);
+
     let template = templates::init_template();
     let rendered_template = try!(template.render("index.html.tera", context).map_err(|e| e.to_string()));
     Ok(rendered_template)
@@ -96,7 +119,7 @@ fn render_template() -> Result<String, String>{
 fn get_events_older_than_yesterday(events: Vec<Event>) -> Vec<Event> {
     let now: DateTime<UTC> = UTC::now();
     let one_day = Duration::seconds(60*60*24);
-    events.into_iter().filter(|x| { x.end_date.signed_duration_since(now) >= one_day }).collect::<Vec<Event>>()
+    events.into_iter().filter(|x| { now.signed_duration_since(x.end_date) <= one_day }).collect::<Vec<Event>>()
 }
 
 fn get_sport_types(events: &[Event]) -> Vec<&str> {
@@ -105,4 +128,3 @@ fn get_sport_types(events: &[Event]) -> Vec<&str> {
     sport_types.dedup();
     sport_types
 }
-
