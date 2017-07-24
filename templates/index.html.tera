@@ -28,8 +28,10 @@
 <div id="centre_nav">
   <h2 class="side_nav_heading"> FILTERS </h2>
   <div class="centre_nav_buttons">
+    <a id="" class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'ALL')">ALL</a>
     {% for sport_type in sport_types %}
-    <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
+    <!-- <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a> -->
+    <a class="filter-button filter-button-off" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
     {% endfor %}
   </div>
   <h2 class="side_nav_heading"> LINKS </h2>
@@ -40,7 +42,7 @@
 
 <div class="content">
   <table class="events_table" id="events_table">
-    <tr class="events_table_row" >
+    <tr class="events_table_row_header" >
       <th class="events_table_heading" colspan="2" >Sport</th>
       <th class="events_table_heading" >Location</th>
       <th class="events_table_heading" >Dates</th>
@@ -73,13 +75,17 @@
 </div>
 
 <div id="mySidenav" class="sidenav">
-  <h2 class="side_nav_heading"> FILTERS </h2>
-  <!-- <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'ALL')">ALL</a> -->
-  {% for sport_type in sport_types %}
-  <a class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
-  {% endfor %}
-  <h2 class="side_nav_heading"> LINKS </h2>
-  <a class="side_link" href="static/about.html"><h3> ABOUT </h3></a>
+  <div id="sidenavFilterButtons">
+    <h2 class="side_nav_heading"> FILTERS </h2>
+    <a id="all_filter" class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'ALL')">ALL</a>
+    {% for sport_type in sport_types %}
+    <a class="filter-button filter-button-off" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
+    {% endfor %}
+  </div>
+  <div id="sideNavLinks">
+    <h2 class="side_nav_heading"> LINKS </h2>
+    <a class="side_link" href="static/about.html"><h3> ABOUT </h3></a>
+  </div>
 </div>
 </body>
 </html>

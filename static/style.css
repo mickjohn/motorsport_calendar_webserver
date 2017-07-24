@@ -72,6 +72,10 @@ h1, h2, strong {
   background-color: #efefef;
 }  
 
+.events_table_row_header {
+  background-color: #ffffff;
+}
+
 /*************************/
 /* SESSION TABLE AND ROW */
 /*************************/

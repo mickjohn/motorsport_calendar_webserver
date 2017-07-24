@@ -6,8 +6,47 @@ var globals = {
   down_triangle: '<b>-</b>'
 };
 
+function hide_all_sports_but_one(sport_type) {
+  var anchors = document.getElementById('mySidenav').getElementsByTagName("A");
+  var sports = [];
+  for (var i=0;i<anchors.length;i++) {
+    var current_sport_type = anchors[i].text;
+    // if (current_sport_type != sport_type && current_sport_type != "ALL") {
+    if (current_sport_type != sport_type) {
+      filter_table(current_sport_type, true);
+    }
+  }
+}
+
+function show_all() {
+  var all_button = document.getElementById('all_filter');
+  var anchors = document.getElementById('mySidenav').getElementsByTagName("A");
+  var sports = [];
+  for (var i=0;i<anchors.length;i++) {
+    var current_sport_type = anchors[i].text;
+    if (current_sport_type == "ALL") {
+      all_button.classList.add('filter-button-on');
+      all_button.classList.remove('filter-button-off');
+    } else {
+      var button = anchors[i];
+      button.classList.add("filter-button-off");
+      button.classList.remove("filter-button-on");
+      filter_table(current_sport_type, false);
+    }
+  }
+}
+
 function toggle_button_clicked(button, sport_type) {
   var class_list = button.classList;
+  var all_button = document.getElementById('all_filter');
+  var all_button_on = in_array(all_button.classList, 'filter-button-on');
+
+  if (!all_button_on && sport_type == "ALL") {
+    show_all();
+    return;
+  } else if ( sport_type == "ALL" ) {
+    return;
+  }
 
   // If it's on turn it off, and hide it's events
   if (in_array(class_list, 'filter-button-on')) {
@@ -17,7 +56,13 @@ function toggle_button_clicked(button, sport_type) {
   } else {
     button.classList.remove("filter-button-off");
     button.classList.add("filter-button-on");
-    filter_table(sport_type, false);
+    if (all_button_on) {
+      hide_all_sports_but_one(sport_type);
+      all_button.classList.remove('filter-button-on');
+    }
+    else {
+      filter_table(sport_type, false);
+    }
   }
 }
 
