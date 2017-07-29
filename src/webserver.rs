@@ -1,4 +1,5 @@
 use std::io::Read;
+use std::path::{Path, PathBuf};
 use rocket;
 use rocket::response::NamedFile;
 use rocket::response::content;
@@ -43,19 +44,10 @@ fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::HTML<String
     }
 }
 
-#[get("/static/<filename>")]
-fn static_file(filename: &str) -> NamedFile {
+#[get("/static/<file..>")]
+fn static_file(file: PathBuf) -> Option<NamedFile> {
     let config = config::global::CONFIG.read().unwrap();
-    let fp = format!("{}/{}",config.static_content_dir, filename);
-    NamedFile::open(&fp).unwrap()
-}
-
-// TODO shouldn't need an extra route for every dir.
-#[get("/static/favicon/<filename>")]
-fn favicons(filename: &str) -> NamedFile {
-    let config = config::global::CONFIG.read().unwrap();
-    let fp = format!("{}/favicon/{}", config.template_directory, filename);
-    NamedFile::open(&fp).unwrap()
+    NamedFile::open(Path::new(&config.static_content_dir).join(file)).ok()
 }
 
 #[error(500)]
@@ -69,7 +61,6 @@ pub fn run_webserver() {
     rocket::ignite()
         .mount("/", routes![
                static_file,
-               favicons,
                template,
                template_with_offset,
                ])

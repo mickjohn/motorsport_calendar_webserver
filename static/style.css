@@ -125,23 +125,30 @@ h1, h2, strong {
 /*SIDE NAV*/
 /**********/
 
-@media only screen {
-  .sidenav {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    padding-top: 60px;
-  }
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  padding-top: 60px;
 }
 
-@media only screen and (max-width: 1023px) {
-  .sidenav {
-    display: none;
-  }
+.sidenav_button {
+  text-decoration: none;
+  color: #2d2d2d;
+  float: left;
+}
+
+.sidenav_button:hover {
+  color: #bd4646;
+}
+
+.sidenav_hidden {
+  display: none;
 }
 
 .filter-button {
@@ -186,51 +193,4 @@ h1, h2, strong {
 .side_link h2,h3 {
   margin: 0;
   color: #ededed;
-}
-
-/**************/
-/* CENTRE NAV */
-/**************/
-
-/* Hide it on full sized screens*/
-#centre_nav {
-  display: none;
-}
-
-/* Show it on mobile screens */
-@media only screen and (max-width: 1023px) {
-  #centre_nav {
-    background-color: #111;
-    margin-top: 1.9em;
-    margin-bottom: 1.9em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    display: block;
-  }
-
-  .side_nav_heading {
-    margin: 0 20px 20px 20px;
-  }
-
-  #centre_nav_filter_buttons {
-    margin: 0 20px 0 20px;
-    display: inline-block;
-  }
-
-  .centre_nav_buttons {
-    margin: 0 20px 0 20px;
-    display: inline-block;
-  }
-
-  .filter-button {
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    margin: 0.125em 0.125em 0.125em 0.125em;
-    float: left;
-  }
-
-  .side_link {
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    margin: 0.125em 0.125em 0.125em 0.125em;
-    float: left;
-  }
 }

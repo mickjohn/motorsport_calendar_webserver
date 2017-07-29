@@ -56,7 +56,7 @@ describe('The page', function() {
     browser.waitForAngularEnabled(false);
     browser.get(url);
     expect(element(by.id('events_table')).getTagName()).toBe('table');
-    expect(element(by.xpath('/html/body/h1')).getText()).toBe('Upcoming Motorsport Events');
+    expect($$('h1').get(1).getText()).toBe('Upcoming Motorsport Events');
   });
 });
 

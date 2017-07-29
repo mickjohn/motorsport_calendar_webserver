@@ -11,7 +11,6 @@ function hide_all_sports_but_one(sport_type) {
   var sports = [];
   for (var i=0;i<anchors.length;i++) {
     var current_sport_type = anchors[i].text;
-    // if (current_sport_type != sport_type && current_sport_type != "ALL") {
     if (current_sport_type != sport_type) {
       filter_table(current_sport_type, true);
     }
@@ -160,13 +159,45 @@ function viewport() {
   return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
 }
 
+function hideSideNav() {
+  var side_nav = document.getElementById('mySidenav');
+  side_nav.classList.remove('sidenav');
+  side_nav.classList.add('sidenav_hidden');
+
+  var body = document.getElementById('page');
+  body.style.marginLeft = "20px";
+}
+
+function showSideNav() {
+  var side_nav = document.getElementById('mySidenav');
+  side_nav.classList.add('sidenav');
+  side_nav.classList.remove('sidenav_hidden');
+
+  var body = document.getElementById('page');
+  body.style.marginLeft = "220px";
+}
+
+function toggleSideNav() {
+  var side_nav = document.getElementById('mySidenav');
+
+  if (side_nav.currentStyle) {
+    var displayStyle = elem.currentStyle.display;
+  } else if (window.getComputedStyle) {
+    var displayStyle = window.getComputedStyle(side_nav, null).getPropertyValue("display");
+  }
+
+  if (displayStyle == 'none') {
+    showSideNav();
+  } else {
+    hideSideNav();
+  }
+}
+
 window.onresize = function(event) {
   var v = viewport();
   if (v.width >= 1023) {
-    var side_nav = document.getElementById('mySidenav');
-    side_nav.style.display = 'block';
+    showSideNav();
   } else {
-    var side_nav = document.getElementById('mySidenav');
-    side_nav.style.display = 'none';
+    hideSideNav();
   }
 };
