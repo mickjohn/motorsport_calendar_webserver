@@ -23,8 +23,7 @@
 <meta name="theme-color" content="#ffffff">
 </head>
 
-<body id="page">
-<!-- <h1><a class="sidenav_button" href="#" onclick="showSideNav()">&#9776;</a></h1> -->
+<body id="page" onload="hideSideNavIfMobile()">
 <h1><a class="sidenav_button" href="#" onclick="toggleSideNav()">&#9776;</a></h1>
 <h1 style="display:inline-block;float:right;width:70%;">Upcoming Motorsport Events</h1>
 

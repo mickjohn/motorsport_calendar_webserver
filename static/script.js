@@ -193,6 +193,13 @@ function toggleSideNav() {
   }
 }
 
+function hideSideNavIfMobile() {
+  var v = viewport();
+  if (v.width < 1023) {
+    hideSideNav();
+  }
+}
+
 window.onresize = function(event) {
   var v = viewport();
   if (v.width >= 1023) {
