@@ -1,6 +1,6 @@
 
 html {
-  background-color: #e0e0e0;
+  background-color: white;
 }
 
 @media only screen {
@@ -22,6 +22,16 @@ h1, h2, strong {
 }
 
 /****************/
+/* NEW DIV TEST */
+/****************/
+
+.event_div {
+  border: 2px solid black;
+  display: inline-block;
+  padding: 0.5em;
+}
+
+/****************/
 /* EVENTS TABLE */
 /****************/
 
@@ -29,8 +39,10 @@ h1, h2, strong {
   padding: 30px;
   margin-bottom: 15px;
   font-family: arial, sans-serif;
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 50px;
 }
 
 .events_table_heading {
@@ -40,20 +52,22 @@ h1, h2, strong {
 }
 
 .events_table_row_arrow {
-  border-top: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
+  /* border-top: 1px solid #dddddd; */
+  /* border-bottom: 30px solid white; */
+  /* border-left: 1px solid #dddddd; */
   border-right: 0;
   text-align: center;
+  /* padding-bottom: 40px; */
 }
 
 .events_table_data {
-  border-top: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
+  /* border-top: 1px solid #dddddd; */
+  /* border-bottom: 30px solid white; */
+  /* border-right: 1px solid #dddddd; */
   border-left: 0;
   text-align: left;
   padding: 8px;
+  /* padding-bottom: 40px; */
 }
 
 @media only screen and (max-width: 1023px) {
