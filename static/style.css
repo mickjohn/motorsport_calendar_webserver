@@ -86,7 +86,7 @@ h1, h2, strong {
   margin-bottom: 10px;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 70%;
+  /* width: 100%; */
 }
 
 /* The row in the events table that contains the hidden sessions table*/

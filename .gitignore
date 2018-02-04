@@ -9,3 +9,5 @@ refresh.sh
 run.sh
 package.sh
 static/copy_to_windows.sh
+node_modules/
+webserver.tar.bz2

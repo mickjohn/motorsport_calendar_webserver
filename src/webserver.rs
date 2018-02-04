@@ -5,13 +5,12 @@ use rocket::response::NamedFile;
 use rocket::response::content;
 use rocket::Error as RocketError;
 use reqwest;
+use reqwest::Client;
 use motorsport_calendar_common::event::*;
 use config;
 use tera::Context;
 use serde_json;
 use templates;
-use hyper::header::ContentType;
-use hyper::mime::{Mime, TopLevel, SubLevel};
 use chrono::prelude::*;
 use chrono::Duration;
 
@@ -21,11 +20,11 @@ struct UtcOffsetSeconds {
 }
 
 #[get("/")]
-fn template() -> Result<content::HTML<String>, RocketError> {
+fn template() -> Result<content::Html<String>, RocketError> {
     let now: DateTime<Local> = Local::now();
     let offset = now.offset().fix().utc_minus_local();
     match render_template(offset) {
-        Ok(rendered) => Ok(content::HTML(rendered)),
+        Ok(rendered) => Ok(content::Html(rendered)),
         Err(e) => {
             envlog_error!("Error getting events from API: '{}'", e); 
             Err(RocketError::Internal)
@@ -34,9 +33,9 @@ fn template() -> Result<content::HTML<String>, RocketError> {
 }
 
 #[get("/?<offset>")]
-fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::HTML<String>, RocketError> {
+fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::Html<String>, RocketError> {
     match render_template(offset.offset) {
-        Ok(rendered) => Ok(content::HTML(rendered)),
+        Ok(rendered) => Ok(content::Html(rendered)),
         Err(e) => {
             envlog_error!("Error getting events from API: '{}'", e); 
             Err(RocketError::Internal)
@@ -72,12 +71,10 @@ fn make_api_request() -> Result<Vec<Event>, String> {
     let config = config::global::CONFIG.read().unwrap();
     envlog_debug!("config = {:?}", *config);
 
-    let content_type = ContentType(Mime(TopLevel::Application, SubLevel::Json, vec![]));
-    let client = try!(reqwest::Client::new().map_err(|e| e.to_string()));
-    let mut resp = try!(client.get(&config.api_url)
-                        .header(content_type)
-                        .send()
-                        .map_err(|e| e.to_string()));
+    let client = Client::new().map_err(|e| e.to_string())?;
+    let mut resp = client.get(&config.api_url).map_err(|e| e.to_string())?
+        .header(reqwest::header::ContentType::json())
+        .send().map_err(|e| e.to_string())?;
 
     if !resp.status().is_success() {
         return Err(format!("url {} returned non 200 status", &config.api_url));
@@ -103,12 +100,12 @@ fn render_template(offset: i32) -> Result<String, String>{
     context.add("offset", &offset);
 
     let template = templates::init_template();
-    let rendered_template = try!(template.render("index.html.tera", context).map_err(|e| e.to_string()));
+    let rendered_template = try!(template.render("index.html.tera", &context).map_err(|e| e.to_string()));
     Ok(rendered_template)
 }
 
 fn get_events_older_than_yesterday(events: Vec<Event>) -> Vec<Event> {
-    let now: DateTime<UTC> = UTC::now();
+    let now: DateTime<Utc> = Utc::now();
     let one_day = Duration::seconds(60*60*24);
     events.into_iter().filter(|x| { now.signed_duration_since(x.end_date) <= one_day }).collect::<Vec<Event>>()
 }

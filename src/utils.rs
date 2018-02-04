@@ -1,6 +1,6 @@
-use chrono::{DateTime, UTC, Datelike, Local, FixedOffset};
+use chrono::{DateTime, Utc, Datelike, Local, FixedOffset};
 
-pub fn pretty_print_date_range(from: &DateTime<UTC>, to: &DateTime<UTC>) -> String {
+pub fn pretty_print_date_range(from: &DateTime<Utc>, to: &DateTime<Utc>) -> String {
     if from.month() == to.month() {
         format!("{month} {day_from}-{day_to}",
                 day_from = from.format("%d"),
@@ -21,7 +21,7 @@ pub fn pretty_print_date_range(from: &DateTime<UTC>, to: &DateTime<UTC>) -> Stri
     }
 }
 
-pub fn pretty_print_session_date_and_time(date: &DateTime<UTC>, timeoption: &Option<DateTime<Local>>) -> String {
+pub fn pretty_print_session_date_and_time(date: &DateTime<Utc>, timeoption: &Option<DateTime<Local>>) -> String {
     let day = date.format("%A").to_string();
     if let &Some(time) = timeoption {
         let hm = time.format("%H:%M").to_string();
@@ -31,7 +31,7 @@ pub fn pretty_print_session_date_and_time(date: &DateTime<UTC>, timeoption: &Opt
     }
 }
 
-pub fn pretty_print_session_date_and_time_with_offset(date: &DateTime<UTC>, timeoption: &Option<DateTime<Local>>, offset: &i32) -> String {
+pub fn pretty_print_session_date_and_time_with_offset(date: &DateTime<Utc>, timeoption: &Option<DateTime<Local>>, offset: &i32) -> String {
     let day = date.format("%A").to_string();
     if let &Some(time) = timeoption {
         let fs = if *offset >= 0 {
@@ -50,18 +50,18 @@ pub fn pretty_print_session_date_and_time_with_offset(date: &DateTime<UTC>, time
 #[cfg(test)]
 mod tests {
     use super::*;
-    use chrono::{UTC, TimeZone};
+    use chrono::{Utc, TimeZone};
 
     #[test]
     fn test_pretty_print_date_range() {
         {
-            let from = UTC.ymd(2017, 3, 23).and_hms(0, 0, 0);
-            let to = UTC.ymd(2017, 3, 25).and_hms(0, 0, 0);
+            let from = Utc.ymd(2017, 3, 23).and_hms(0, 0, 0);
+            let to = Utc.ymd(2017, 3, 25).and_hms(0, 0, 0);
             assert_eq!(pretty_print_date_range(&from, &to), String::from("March 23-25"));
         }
         {
-            let from = UTC.ymd(2017, 4, 30).and_hms(0, 0, 0);
-            let to = UTC.ymd(2017, 5, 2).and_hms(0, 0, 0);
+            let from = Utc.ymd(2017, 4, 30).and_hms(0, 0, 0);
+            let to = Utc.ymd(2017, 5, 2).and_hms(0, 0, 0);
             assert_eq!(pretty_print_date_range(&from, &to), String::from("April 30 - May 02"));
         }
     }
