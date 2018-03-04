@@ -85,7 +85,7 @@ fn make_api_request() -> Result<Vec<Event>, String> {
     envlog_debug!("repsonse from {} = {}", &config.api_url, s);
 
     let mut events: Vec<Event> = serde_json::from_str(&s).unwrap();
-    events.sort_by(|a,b| a.start_date.cmp(&b.start_date));
+    events.sort_by(|a,b| a.get_start_date().cmp(&b.get_start_date()));
     envlog_debug!("deserialized and sorted events = {:?}", events);
     Ok(events)
 }
@@ -105,9 +105,13 @@ fn render_template(offset: i32) -> Result<String, String>{
 }
 
 fn get_events_older_than_yesterday(events: Vec<Event>) -> Vec<Event> {
+    envlog_debug!("About to filter events older than one day");
     let now: DateTime<Utc> = Utc::now();
     let one_day = Duration::seconds(60*60*24);
-    events.into_iter().filter(|x| { now.signed_duration_since(x.end_date) <= one_day }).collect::<Vec<Event>>()
+    events.into_iter()
+        .filter(|x| x.get_end_date().is_some())
+        .filter(|x| { now.signed_duration_since(x.get_end_date().unwrap().and_hms(0,0,0)) <= one_day })
+        .collect::<Vec<Event>>()
 }
 
 fn get_sport_types(events: &[Event]) -> Vec<&str> {

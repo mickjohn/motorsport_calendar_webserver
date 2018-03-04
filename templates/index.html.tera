@@ -41,7 +41,7 @@
     <tr class="events_table_row" onclick="toggle_session_row(this)">
       <td class="events_table_row_arrow"><b>+</b></td>
       <td class="events_table_data">{{ event.sport }}</td>
-      <td class="events_table_data"><b>{{ event.country }}</b>, {{ event.location }}</td>
+      <td class="events_table_data"><b>{{ event.country }}</b> {{ event.location }}</td>
       <td class="events_table_data">{{ event | event_date_range }} </td>
     </tr>
     <tr class="sessions-row-hidden">

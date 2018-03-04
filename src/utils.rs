@@ -1,27 +1,31 @@
-use chrono::{DateTime, Utc, Datelike, Local, FixedOffset};
+use chrono::{Date, DateTime, Utc, Datelike, Local, FixedOffset};
 
-pub fn pretty_print_date_range(from: &DateTime<Utc>, to: &DateTime<Utc>) -> String {
-    if from.month() == to.month() {
-        format!("{month} {day_from}-{day_to}",
-                day_from = from.format("%d"),
-                day_to = to.format("%d"),
-                month = from.format("%B"),
-        )
-    } else if from.month() <= to.month() {
-        format!("{month_from} {day_from} - {month_to} {day_to}",
-                day_from = from.format("%d"),
-                month_from = from.format("%B"),
-                day_to = to.format("%d"),
-                month_to = to.format("%B"),
-        )
+pub fn pretty_print_date_range(from_option: &Option<Date<Utc>>, to_option: &Option<Date<Utc>>) -> String {
+    if let(&Some(ref from), &Some(ref to)) = (from_option, to_option) {
+        if from.month() == to.month() {
+            format!("{month} {day_from}-{day_to}",
+                    day_from = from.format("%d"),
+                    day_to = to.format("%d"),
+                    month = from.format("%B"),
+                    )
+        } else if from.month() <= to.month() {
+            format!("{month_from} {day_from} - {month_to} {day_to}",
+                    day_from = from.format("%d"),
+                    month_from = from.format("%B"),
+                    day_to = to.format("%d"),
+                    month_to = to.format("%B"),
+                    )
+        } else {
+            let from_string = from.to_string();
+            let to_string = to.to_string();
+            format!("{} - {}", from_string, to_string)
+        }
     } else {
-        let from_string = from.to_string();
-        let to_string = to.to_string();
-        format!("{} - {}", from_string, to_string)
+        "TBD".to_string()
     }
 }
 
-pub fn pretty_print_session_date_and_time(date: &DateTime<Utc>, timeoption: &Option<DateTime<Local>>) -> String {
+pub fn pretty_print_session_date_and_time(date: &DateTime<Utc>, timeoption: &Option<DateTime<Utc>>) -> String {
     let day = date.format("%A").to_string();
     if let &Some(time) = timeoption {
         let hm = time.format("%H:%M").to_string();
@@ -31,7 +35,7 @@ pub fn pretty_print_session_date_and_time(date: &DateTime<Utc>, timeoption: &Opt
     }
 }
 
-pub fn pretty_print_session_date_and_time_with_offset(date: &DateTime<Utc>, timeoption: &Option<DateTime<Local>>, offset: &i32) -> String {
+pub fn pretty_print_session_date_and_time_with_offset(date: &DateTime<Utc>, timeoption: &Option<DateTime<Utc>>, offset: &i32) -> String {
     let day = date.format("%A").to_string();
     if let &Some(time) = timeoption {
         let fs = if *offset >= 0 {

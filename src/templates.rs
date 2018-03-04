@@ -27,7 +27,7 @@ pub fn init_template() -> Tera {
 
 pub fn event_date_range_helper(value: tera::Value, _: HashMap<String, tera::Value>) -> tera::Result<tera::Value> {
     let event = try_get_value!("event_date_range", "value", Event, value);
-    let s = utils::pretty_print_date_range(&event.start_date, &event.end_date);
+    let s = utils::pretty_print_date_range(&event.get_start_date(), &event.get_end_date());
     Ok(tera::to_value(&s).unwrap())
 }
 
