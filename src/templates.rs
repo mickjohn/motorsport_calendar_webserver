@@ -4,6 +4,7 @@ use tera::Tera;
 use motorsport_calendar_common::event::*;
 use std::collections::HashMap;
 use config;
+use chrono::prelude::*;
 
 lazy_static! {
     pub static ref TERA: Tera = {
@@ -33,6 +34,9 @@ pub fn event_date_range_helper(value: tera::Value, _: HashMap<String, tera::Valu
 
 pub fn session_date_helper(value: tera::Value, params: HashMap<String, tera::Value>) -> tera::Result<tera::Value> {
     let session = try_get_value!("session_date", "value", Session, value);
+    let session_time = &session.time.map(|dt| {
+         Local.from_utc_datetime(&dt.naive_local())
+    });
     let s = if let Some(offset) = params.get("utc_offset") {
         let o = match offset {
             &tera::Value::Number(ref x) => Some(x.as_i64().unwrap() as i32),
@@ -41,10 +45,10 @@ pub fn session_date_helper(value: tera::Value, params: HashMap<String, tera::Val
         if let Some(i32_offset) = o {
             utils::pretty_print_session_date_and_time_with_offset(&session.date, &session.time, &i32_offset)
         } else {
-            utils::pretty_print_session_date_and_time(&session.date, &session.time)
+            utils::pretty_print_session_date_and_time(&session.date, &session_time)
         }
     } else {
-        utils::pretty_print_session_date_and_time(&session.date, &session.time)
+        utils::pretty_print_session_date_and_time(&session.date, &session_time)
     };
     Ok(tera::to_value(&s).unwrap())
 }

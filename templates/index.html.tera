@@ -54,7 +54,8 @@
           {% for session in event.sessions %}
           <tr class="sessions_table_row">
             <td class="sessions_table_data">{{ session.name }}</td>
-            <td class="sessions_table_data">{{ session | session_date(utc_offset=offset) }}</td>
+            <td class="sessions_table_data">{{ session | session_date }}</td>
+            {# <td class="sessions_table_data">{{ session | session_date(utc_offset=offset) }}</td> #}
           </tr>
           {% endfor %}
         </table>

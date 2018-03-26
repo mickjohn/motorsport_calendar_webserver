@@ -23,7 +23,7 @@ struct UtcOffsetSeconds {
 fn template() -> Result<content::Html<String>, RocketError> {
     let now: DateTime<Local> = Local::now();
     let offset = now.offset().fix().utc_minus_local();
-    match render_template(offset) {
+    match render_template() {
         Ok(rendered) => Ok(content::Html(rendered)),
         Err(e) => {
             envlog_error!("Error getting events from API: '{}'", e); 
@@ -34,7 +34,7 @@ fn template() -> Result<content::Html<String>, RocketError> {
 
 #[get("/?<offset>")]
 fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::Html<String>, RocketError> {
-    match render_template(offset.offset) {
+    match render_template() {
         Ok(rendered) => Ok(content::Html(rendered)),
         Err(e) => {
             envlog_error!("Error getting events from API: '{}'", e); 
@@ -90,14 +90,15 @@ fn make_api_request() -> Result<Vec<Event>, String> {
     Ok(events)
 }
 
-fn render_template(offset: i32) -> Result<String, String>{
+// fn render_template(offset: i32) -> Result<String, String>{
+fn render_template() -> Result<String, String>{
     let mut context = Context::new();
     let events = try!(make_api_request());
     // Don't display event's that are over a day old.
     let events_older_than_yesterday = get_events_older_than_yesterday(events);
     context.add("events", &events_older_than_yesterday);
     context.add("sport_types", &get_sport_types(&events_older_than_yesterday));
-    context.add("offset", &offset);
+    // context.add("offset", &offset);
 
     let template = templates::init_template();
     let rendered_template = try!(template.render("index.html.tera", &context).map_err(|e| e.to_string()));
