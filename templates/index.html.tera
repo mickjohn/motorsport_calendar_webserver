@@ -23,8 +23,8 @@
 <meta name="theme-color" content="#ffffff">
 </head>
 
-<body id="page" onload="hideSideNavIfMobile()">
-<h1><a class="sidenav_button" href="#" onclick="toggleSideNav()">&#9776;</a></h1>
+<body id="page">
+<h1><a class="sidenav_button" href="#">&#9776;</a></h1>
 <h1 style="display:inline-block;float:right;width:70%;">Upcoming Motorsport Events</h1>
 
 <div class="content">
@@ -38,7 +38,7 @@
     </thead>
     {% for event in events %}
     <tbody>
-    <tr class="events_table_row" onclick="toggle_session_row(this)">
+    <tr class="events_table_row">
       <td class="events_table_row_arrow"><b>+</b></td>
       <td class="events_table_data">{{ event.sport }}</td>
       <td class="events_table_data"><b>{{ event.country }}</b> {{ event.location }}</td>
@@ -69,15 +69,14 @@
 <div id="mySidenav" class="sidenav">
   <div id="sidenavFilterButtons">
     <h2 class="side_nav_heading"> FILTERS </h2>
-    <a id="all_filter" class="filter-button filter-button-on" href="#" onclick="toggle_button_clicked(this,'ALL')">ALL</a>
+    <a id="all_filter" class="filter-button filter-button-on" href="#">ALL</a>
     {% for sport_type in sport_types %}
-    <a class="filter-button filter-button-off" href="#" onclick="toggle_button_clicked(this,'{{ sport_type }}')">{{ sport_type }}</a>
+    <a class="filter-button filter-button-off" href="#">{{ sport_type }}</a>
     {% endfor %}
   </div>
   <div id="sideNavLinks">
     <h2 class="side_nav_heading"> LINKS </h2>
     <a class="side_link" href="static/about.html"><h3> ABOUT </h3></a>
-    <!-- <a class="side_link" id="close_button" href="#" onclick="hideSideNav()"><h3> CLOSE </h3></a> -->
   </div>
 </div>
 </body>

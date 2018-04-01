@@ -35,8 +35,9 @@ function show_all() {
   }
 }
 
-function toggle_button_clicked(button, sport_type) {
-  var class_list = button.classList;
+function toggle_button_clicked() {
+  var sport_type = this.text;
+  var class_list = this.classList;
   var all_button = document.getElementById('all_filter');
   var all_button_on = in_array(all_button.classList, 'filter-button-on');
 
@@ -49,12 +50,12 @@ function toggle_button_clicked(button, sport_type) {
 
   // If it's on turn it off, and hide it's events
   if (in_array(class_list, 'filter-button-on')) {
-    button.classList.add("filter-button-off");
-    button.classList.remove("filter-button-on");
+    this.classList.add("filter-button-off");
+    this.classList.remove("filter-button-on");
     filter_table(sport_type, true);
   } else {
-    button.classList.remove("filter-button-off");
-    button.classList.add("filter-button-on");
+    this.classList.remove("filter-button-off");
+    this.classList.add("filter-button-on");
     if (all_button_on) {
       hide_all_sports_but_one(sport_type);
       all_button.classList.remove('filter-button-on');
@@ -91,16 +92,16 @@ function show_session_row(session_row) {
   }
 }
 
-function toggle_session_row(event_row) {
+function toggle_session_row() {
   var table = document.getElementById('events_table');
-  var session_row = table.rows[event_row.rowIndex + 1];
+  var session_row = table.rows[this.rowIndex + 1];
 
   if (in_array(session_row.classList, 'sessions-row')) {
     hide_session_row(session_row);
-    set_event_row_triangle(event_row, globals.right_triangle);
+    set_event_row_triangle(this, globals.right_triangle);
   } else {
     show_session_row(session_row);
-    set_event_row_triangle(event_row, globals.down_triangle);
+    set_event_row_triangle(this, globals.down_triangle);
   }
 }
 
@@ -208,3 +209,33 @@ window.onresize = function(event) {
     hideSideNav();
   }
 };
+
+
+// Add event listeners
+window.addEventListener("load", function(event) {
+  hideSideNavIfMobile();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Add click listener to the side nav button
+  var sidenav_buttons = document.getElementsByClassName('sidenav_button');
+  for( var i = 0; i < sidenav_buttons.length; i++ ) {
+    var element = sidenav_buttons[i];
+    element.addEventListener('click', toggleSideNav);
+  }
+
+  // Add click listener to the table event rows
+  var events_table_rows = document.getElementsByClassName('events_table_row');
+  for ( var i = 0; i < events_table_rows.length; i++ ) {
+    var element = events_table_rows[i];
+    element.addEventListener('click', toggle_session_row);
+  }
+
+  // Add click listener to the filter buttons
+  var filter_buttons = document.getElementsByClassName('filter-button');
+  for ( var i = 0; i < filter_buttons.length; i++ ) {
+    var element = filter_buttons[i];
+    element.addEventListener('click', toggle_button_clicked);
+  }
+
+});
