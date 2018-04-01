@@ -69,7 +69,7 @@ echo "Package: ${NAME}
 Version: ${VERSION}
 Section: base
 Priority: optional
-Architecture: i386
+Architecture: amd64
 Depends: 
 Maintainer: Your Name <you@email.com>
 Description: Hello World
