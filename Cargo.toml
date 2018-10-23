@@ -6,8 +6,7 @@ authors = ["Michael Ashe <mickjohnashe@hotmail.com>"]
 [dependencies]
 rocket = "0.3.17"
 rocket_codegen = "0.3.17"
-# log = "0.3"
-# env_logger = "0.3"
+env_logger = "0.4"
 serde = "1.0.80"
 serde_derive = "1.0.80"
 serde_yaml = "0.8.6"
@@ -23,7 +22,4 @@ clap = "2.23.1"
 git = "https://github.com/mickjohn/motorsport_calendar_common.git"
 
 [dependencies.log]
-path = "/home/mick/Programs/rust/third_party/log"
-
-[dependencies.env_logger]
-path = "/home/mick/Programs/rust/third_party/log/env"
+git = "https://github.com/mickjohn/log.git"

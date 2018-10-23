@@ -26,7 +26,7 @@ fn template() -> Result<content::Html<String>, RocketError> {
     match render_template() {
         Ok(rendered) => Ok(content::Html(rendered)),
         Err(e) => {
-            envlog_error!("Error getting events from API: '{}'", e); 
+            rlog_error!("Error getting events from API: '{}'", e); 
             Err(RocketError::Internal)
         },
     }
@@ -37,7 +37,7 @@ fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::Html<String
     match render_template() {
         Ok(rendered) => Ok(content::Html(rendered)),
         Err(e) => {
-            envlog_error!("Error getting events from API: '{}'", e); 
+            rlog_error!("Error getting events from API: '{}'", e); 
             Err(RocketError::Internal)
         },
     }
@@ -69,7 +69,7 @@ pub fn run_webserver() {
 
 fn make_api_request() -> Result<Vec<Event>, String> {
     let config = config::global::CONFIG.read().unwrap();
-    envlog_debug!("config = {:?}", *config);
+    rlog_debug!("config = {:?}", *config);
 
     let client = Client::new().map_err(|e| e.to_string())?;
     let mut resp = client.get(&config.api_url).map_err(|e| e.to_string())?
@@ -82,11 +82,11 @@ fn make_api_request() -> Result<Vec<Event>, String> {
 
     let mut s = String::new();
     try!(resp.read_to_string(&mut s).map_err(|e| e.to_string()));
-    envlog_debug!("repsonse from {} = {}", &config.api_url, s);
+    rlog_debug!("repsonse from {} = {}", &config.api_url, s);
 
     let mut events: Vec<Event> = serde_json::from_str(&s).unwrap();
     events.sort_by(|a,b| a.get_start_date().cmp(&b.get_start_date()));
-    envlog_debug!("deserialized and sorted events = {:?}", events);
+    rlog_debug!("deserialized and sorted events = {:?}", events);
     Ok(events)
 }
 
@@ -106,7 +106,7 @@ fn render_template() -> Result<String, String>{
 }
 
 fn get_events_older_than_yesterday(events: Vec<Event>) -> Vec<Event> {
-    envlog_debug!("About to filter events older than one day");
+    rlog_debug!("About to filter events older than one day");
     let now: DateTime<Utc> = Utc::now();
     let one_day = Duration::seconds(60*60*24);
     events.into_iter()
