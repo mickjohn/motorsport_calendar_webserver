@@ -4,14 +4,14 @@ version = "0.1.0"
 authors = ["Michael Ashe <mickjohnashe@hotmail.com>"]
 
 [dependencies]
-rocket = "0.3.14"
-rocket_codegen = "0.3.14"
+rocket = "0.3.17"
+rocket_codegen = "0.3.17"
 # log = "0.3"
 # env_logger = "0.3"
-serde = "1.0.70"
-serde_derive = "1.0.11"
-serde_yaml = "0.7.5"
-serde_json = "1.0.22"
+serde = "1.0.80"
+serde_derive = "1.0.80"
+serde_yaml = "0.8.6"
+serde_json = "1.0.32"
 chrono = { version = "0.4", features = ["serde"] }
 reqwest = "0.7.2"
 lazy_static = "0.2.7"
