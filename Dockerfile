@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 RUN mkdir -p "/var/motorsport_calendar_webserver_www/static" \
   && mkdir -p "/var/motorsport_calendar_webserver_www/templates" \
   && apt-get update \
-  && apt-get install libssl1.0.0 -y
+  && apt-get install libssl1.1 -y
 
 WORKDIR /etc/motorsport_calendar_webserver
 COPY docker_config.yml .

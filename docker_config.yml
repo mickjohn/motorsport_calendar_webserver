@@ -1,5 +1,5 @@
 ---
-api_url: http://mscapi:8000/events
+api_url: http://msc_api:8000/events
 static_content_dir: /var/motorsport_calendar_webserver_www/static
 template_directory: /var/motorsport_calendar_webserver_www/templates
 ...
