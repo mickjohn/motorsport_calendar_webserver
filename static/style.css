@@ -199,3 +199,47 @@ h1, h2, strong {
   margin: 0;
   color: #ededed;
 }
+
+/* Sport Counts */
+.event_box {
+  display: inline-block;
+  margin: 0.8em;
+  color: #484848;
+  background-color: #fff;
+  /* text-align: center; */
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  width: 20em;
+  background-image: linear-gradient(90deg, #717171, #717171 15px, transparent 0, transparent);
+}
+
+.event_box h1,h2,h3 {
+  margin: 0;
+  /* margin-left: 1em; */
+  /* margin-left: 30px; */
+  padding: 0.3em;
+}
+
+.event_box span {
+  font-size: 24px;
+  padding: 0.3em;
+  /* margin-left: 1em; */
+  /* margin-left: 30px; */
+}
+
+#sport-count-section a, u {
+    text-decoration: none;
+}
+
+.formula_1_event_box {
+  background-image: linear-gradient(90deg, #e00600, #e00600 15px, transparent 0, transparent);
+  /* background-color: #e00600; */
+  /* color: white; */
+}
+
+.indycar_event_box {
+  background-image: linear-gradient(90deg, #0b1d89, #0b1d89 15px, transparent 0, transparent);
+  /* background-color: #0b1d89; */
+  /* color: white; */
+}
