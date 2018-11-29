@@ -1,6 +1,7 @@
 
 html {
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
+  background-color: #ffffff;
 }
 
 @media only screen {
@@ -200,46 +201,57 @@ h1, h2, strong {
   color: #ededed;
 }
 
-/* Sport Counts */
-.event_box {
+/* Event Cards */
+.event_card {
   display: inline-block;
-  margin: 0.8em;
+  border: 1px solid #484848;
   color: #484848;
-  background-color: #fff;
-  /* text-align: center; */
+  border-radius: 0.3em;
+  width: 40em;
+  text-align: left;
+  text-decoration: none;
+  padding-top: 0.4em;
+  margin: 0.7em;
+}
+
+.event_card_header {
+  font-size: 2.0em;
+  padding-left: 0.7em;
+  padding-right: 1em;
+}
+
+.event_card_content {
+  border-bottom: 1px solid #484848;
+  font-size: 1.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.event_card_footer {
+  font-size: 1.1em;
+  padding-left: 1em;
+  padding-right: 1em;
   padding-top: 1em;
   padding-bottom: 1em;
-  padding-left: 1em;
-  width: 20em;
-  background-image: linear-gradient(90deg, #717171, #717171 15px, transparent 0, transparent);
+  display: inline;
 }
 
-.event_box h1,h2,h3 {
+.event_card_footer_subtext {
+  float: inline-start;
+  padding: 1em;
+}
+
+.event_card_footer_details_link {
+  float: inline-end;
+  padding: 1em;
+}
+
+.event_card_footer_details_link a {
+  color: white;
+  padding: 0.4em;
   margin: 0;
-  /* margin-left: 1em; */
-  /* margin-left: 30px; */
-  padding: 0.3em;
-}
-
-.event_box span {
-  font-size: 24px;
-  padding: 0.3em;
-  /* margin-left: 1em; */
-  /* margin-left: 30px; */
-}
-
-#sport-count-section a, u {
-    text-decoration: none;
-}
-
-.formula_1_event_box {
-  background-image: linear-gradient(90deg, #e00600, #e00600 15px, transparent 0, transparent);
-  /* background-color: #e00600; */
-  /* color: white; */
-}
-
-.indycar_event_box {
-  background-image: linear-gradient(90deg, #0b1d89, #0b1d89 15px, transparent 0, transparent);
-  /* background-color: #0b1d89; */
-  /* color: white; */
+  text-decoration: none;
+  border-radius: 0.3em;
+  border-color: #4983d6;
+  background-color: #4983d6 ;
 }

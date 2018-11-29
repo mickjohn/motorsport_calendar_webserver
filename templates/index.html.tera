@@ -65,23 +65,23 @@
   <!--   {% endfor %} -->
   <!-- </table> -->
 
-  <!-- new UI attempt -->
-  <div id="sport-count-section">
-    {% for event in events %}
-    <a href="#">
-      <div class="event_box {{ event.sport | lower | replace(from=" ", to="_") }}_event_box">
-      <!-- <div class="event_box_header {{ event.sport | lower | replace(from=" ", to="_")}}_event_box_header"> -->
-        <!-- <div class="event_box_header"> -->
-          <h1>{{ event.sport }}</h1>
-        <!-- </div> -->
-        <!-- <h1>{{ event.sport }}</h1> -->
-        <span> <b>{{ event.country }}</b> {{ event.location}} </span>
-        <h2> March 21 - 24</h3>
+    <!-- new UI attempt -->
+    <div id="sport-count-section">
+      {% for event in events %}
+      <div class="event_card">
+        <div class="event_card_header"><span>Formula 1</span> Grand Prix Du France</div>
+        <div class="event_card_content">
+          <p><b> France</b>, Nice, Circuit Paul Ricard</p>
+          <p> 31st June TO 2nd July </p>
+        </div>
+        <div class="event_card_footer">
+          <div class="event_card_footer_subtext"> 6 Months away </div>
+          <div class="event_card_footer_details_link"><a href="#"><b>view details</b></a></div>
+        </div>
       </div>
-    </a>
-    {% endfor %}
-  </div>
-  <!-- END new UI attempt -->
+      {% endfor %}
+    </div>
+    <!-- END new UI attempt -->
 
 </div>
 
