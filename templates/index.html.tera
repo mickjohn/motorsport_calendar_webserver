@@ -28,61 +28,25 @@
 <h1 id="main_title">Upcoming Motorsport Events</h1>
 
 <div class="content">
-  <!-- <table class="events_table" id="events_table"> -->
-  <!--   <thead> -->
-  <!--     <tr class="events_table_row_header" > -->
-  <!--       <th class="events_table_heading" colspan="2" >Sport</th> -->
-  <!--       <th class="events_table_heading" >Location</th> -->
-  <!--       <th class="events_table_heading" >Dates</th> -->
-  <!--     </tr> -->
-  <!--   </thead> -->
-  <!--   {% for event in events %} -->
-  <!--   <tbody> -->
-  <!--   <tr class="events_table_row"> -->
-  <!--     <td class="events_table_row_arrow"><b>+</b></td> -->
-  <!--     <td class="events_table_data">{{ event.sport }}</td> -->
-  <!--     <td class="events_table_data"><b>{{ event.country }}</b> {{ event.location }}</td> -->
-  <!--     <td class="events_table_data">{{ event | event_date_range }} </td> -->
-  <!--   </tr> -->
-  <!--   <tr class="sessions-row-hidden"> -->
-  <!--     <td colspan="3"> -->
-  <!--       <table class="sessions_table"> -->
-  <!--         <tr class="sessions_table_row"> -->
-  <!--           <th class="sessions_table_header">Session name</th> -->
-  <!--           <th class="sessions_table_header">time</th> -->
-  <!--         </tr> -->
-  <!--         {% for session in event.sessions %} -->
-  <!--         <tr class="sessions_table_row"> -->
-  <!--           <td class="sessions_table_data">{{ session.name }}</td> -->
-  <!--           <td class="sessions_table_data">{{ session | session_date }}</td> -->
-  <!--           {# <td class="sessions_table_data">{{ session | session_date(utc_offset=offset) }}</td> #} -->
-  <!--         </tr> -->
-  <!--         {% endfor %} -->
-  <!--       </table> -->
-  <!--     </td> -->
-  <!--   </tr> -->
-  <!--   </tbody> -->
-  <!--   {% endfor %} -->
-  <!-- </table> -->
-
-    <!-- new UI attempt -->
-    <div id="sport-count-section">
-      {% for event in events %}
-      <div class="event_card">
-        <div class="event_card_header"><span>Formula 1</span> Grand Prix Du France</div>
-        <div class="event_card_content">
-          <p><b> France</b>, Nice, Circuit Paul Ricard</p>
-          <p> 31st June TO 2nd July </p>
-        </div>
-        <div class="event_card_footer">
-          <div class="event_card_footer_subtext"> 6 Months away </div>
-          <div class="event_card_footer_details_link"><a href="#"><b>view details</b></a></div>
-        </div>
-      </div>
-      {% endfor %}
+  {% for event in events %}
+  <div class="event_card">
+    <div class="event_card_header">
+      <!-- Not using tags just yet -->
+      <!-- <span class="sport_tag {{event.sport|lower|replace(from=" ", to="_")}}_tag">{{ event.sport }}</span> -->
+      <span class="event_card_sport_name {{event.sport|lower|replace(from=" ", to="_")}}_name">{{ event.sport }}</span>
+      <span>{{ event.location }}</span>
+      <!-- <span>Gran Premio Heineken D'Italia</span> -->
     </div>
-    <!-- END new UI attempt -->
-
+    <div class="event_card_content">
+      <p><b> {{ event.location }}</b>, {{ event.location }}, Circuit Paul Ricard</p>
+      <p> {{ event | event_date_range }} </p>
+    </div>
+    <div class="event_card_footer">
+      <div class="event_card_footer_subtext"> 6 Months away </div>
+      <div class="event_card_footer_details_link"><a href="#"><b>view details</b></a></div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 
 <div id="mySidenav" class="sidenav">

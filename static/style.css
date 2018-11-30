@@ -28,106 +28,6 @@ h1, h2, strong {
   width:70%;
 }
 
-/****************/
-/* EVENTS TABLE */
-/****************/
-
-.events_table {
-  padding: 30px;
-  margin-bottom: 15px;
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.events_table_heading {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-.events_table_row_arrow {
-  border-top: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  border-right: 0;
-  text-align: center;
-}
-
-.events_table_data {
-  border-top: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-left: 0;
-  text-align: left;
-  padding: 8px;
-}
-
-@media only screen and (max-width: 1023px) {
-  .events_table_data {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-}
-
-.events_table_row {
-  background-color: #ffffff;
-  cursor: pointer
-}
-
-.events_table_row:hover {
-  background-color: #efefef;
-}  
-
-.events_table_row_header {
-  background-color: #ffffff;
-}
-
-/*************************/
-/* SESSION TABLE AND ROW */
-/*************************/
-
-.sessions_table {
-  padding: 30px;
-  margin-left: 40px;
-  margin-bottom: 10px;
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  /* width: 100%; */
-}
-
-/* The row in the events table that contains the hidden sessions table*/
-.sessions-row {
-  display: table-row;
-}
-
-.sessions-row-hidden {
-  display: none;
-}
-
-/* for td inside sessions table */
-.sessions_table_data {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-/* for th inside sessions table */
-.sessions_table_header {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-/* for tr inside sessions table */
-.sessions_table_row {
-  background-color: #ffffff;
-}
-
-.sessions_table_row:hover {
-  background-color: #efefef;
-}  
-
 /**********/
 /*SIDE NAV*/
 /**********/
@@ -201,7 +101,10 @@ h1, h2, strong {
   color: #ededed;
 }
 
+/***************/
 /* Event Cards */
+/***************/
+
 .event_card {
   display: inline-block;
   border: 1px solid #484848;
@@ -216,23 +119,18 @@ h1, h2, strong {
 
 .event_card_header {
   font-size: 2.0em;
-  padding-left: 0.7em;
-  padding-right: 1em;
+  padding: 0 1em 0 0.7em;
 }
 
 .event_card_content {
   border-bottom: 1px solid #484848;
   font-size: 1.5em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 0 1em;
 }
 
 .event_card_footer {
   font-size: 1.1em;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding: 1em;
   display: inline;
 }
 
@@ -254,4 +152,30 @@ h1, h2, strong {
   border-radius: 0.3em;
   border-color: #4983d6;
   background-color: #4983d6 ;
+}
+
+/********/
+/* Tags */
+/********/
+
+.sport_tag {
+  font-size:0.5em;
+  vertical-align: middle;
+  background-color: grey;
+  color: white;
+  border-radius: 2em;
+  padding: 0.3em 0.6em;
+  font-weight: bold;
+}
+
+.formula_1_tag {
+  background-color: red;
+}
+
+.indycar_tag {
+  background-color: blue;
+}
+
+.gp2_tag {
+  background-color: green;
 }
