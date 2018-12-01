@@ -179,3 +179,27 @@ h1, h2, strong {
 .gp2_tag {
   background-color: green;
 }
+
+/*********/
+/* Names */
+/*********/
+
+.event_card_sport_name {
+  text-decoration: underline;
+}
+
+.formula_1_name {
+  color: #bf3f3f;
+}
+
+.indycar_name {
+  color: #0b1d89;
+}
+
+.gp2_name {
+  color: #00adef;
+}
+
+.formula_2_name {
+  color: #00adef;
+}

@@ -38,7 +38,8 @@
       <!-- <span>Gran Premio Heineken D'Italia</span> -->
     </div>
     <div class="event_card_content">
-      <p><b> {{ event.location }}</b>, {{ event.location }}, Circuit Paul Ricard</p>
+      <!-- <p><b> {{ event.location }}</b>, {{ event.location }}, Circuit Paul Ricard</p> -->
+      <p><b>{{ event.location }}</b></p>
       <p> {{ event | event_date_range }} </p>
     </div>
     <div class="event_card_footer">
