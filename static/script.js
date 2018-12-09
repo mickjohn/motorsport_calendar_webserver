@@ -1,113 +1,64 @@
+var allButton;
+var filterButtons;
+var numberOfButtons;
+var numberOfButtonsOn;
 
-var globals = {
-  // right_triangle: '&#x25BA',
-  // down_triangle: '&#x25BC'
-  right_triangle: '<b>+</b>',
-  down_triangle: '<b>-</b>'
-};
-
-function hide_all_sports_but_one(sport_type) {
-  var anchors = document.getElementById('mySidenav').getElementsByTagName("A");
-  var sports = [];
-  for (var i=0;i<anchors.length;i++) {
-    var current_sport_type = anchors[i].text;
-    if (current_sport_type != sport_type) {
-      filter_table(current_sport_type, true);
+function showAll(e) {
+  numberOfButtonsOn = numberOfButtons;
+  for (var filter_button of filterButtons) {
+    var sport = filter_button.innerText.replace(" ", "_");
+    var class_name = sport + "_filter_button";
+    if (!in_array(filter_button.classList, class_name)) {
+      filter_button.classList.add(class_name);
+      showSport(sport);
     }
   }
 }
 
-function show_all() {
-  var all_button = document.getElementById('all_filter');
-  var anchors = document.getElementById('mySidenav').getElementsByTagName("A");
-  var sports = [];
-  for (var i=0;i<anchors.length;i++) {
-    var current_sport_type = anchors[i].text;
-    if (current_sport_type == "ALL") {
-      all_button.classList.add('filter-button-on');
-      all_button.classList.remove('filter-button-off');
-    } else {
-      var button = anchors[i];
-      button.classList.add("filter-button-off");
-      button.classList.remove("filter-button-on");
-      filter_table(current_sport_type, false);
-    }
+function showSport(sportName) { 
+  var class_name = sportName + "_event_list_item";
+  var list_items = document.getElementsByClassName(class_name);
+  for (var list_item of list_items) {
+    list_item.classList.remove("event_list_item_hidden");
   }
 }
 
-function toggle_button_clicked() {
-  var sport_type = this.text;
-  var class_list = this.classList;
-  var all_button = document.getElementById('all_filter');
-  var all_button_on = in_array(all_button.classList, 'filter-button-on');
-
-  if (!all_button_on && sport_type == "ALL") {
-    show_all();
-    return;
-  } else if ( sport_type == "ALL" ) {
-    return;
+function hideSport(sportName) {
+  var class_name = sportName + "_event_list_item";
+  var list_items = document.getElementsByClassName(class_name);
+  for (var list_item of list_items) {
+    list_item.classList.add("event_list_item_hidden");
   }
+}
 
-  // If it's on turn it off, and hide it's events
-  if (in_array(class_list, 'filter-button-on')) {
-    this.classList.add("filter-button-off");
-    this.classList.remove("filter-button-on");
-    filter_table(sport_type, true);
+function filterButtonClicked(e) {
+  var button = e.target;
+  var sport = button.innerText.replace(" ", "_");
+  var class_name = sport + "_filter_button";
+  var button_is_on = in_array(button.classList, class_name);
+
+  if (button_is_on && numberOfButtonsOn === numberOfButtons) {
+    // Hide all except this
+    numberOfButtonsOn = 1;
+    for (var filterButton of filterButtons) {
+      var otherSport = filterButton.innerText.replace(" ", "_");
+      var otherClassName = otherSport + "_filter_button";
+      if (otherSport !== sport && otherSport !== 'all') {
+        hideSport(otherSport);
+        filterButton.classList.remove(otherClassName);
+      }
+    }
+  } else if (button_is_on) {
+    // Turn it off
+    numberOfButtonsOn -= 1;
+    hideSport(sport)
+    button.classList.remove(class_name);
   } else {
-    this.classList.remove("filter-button-off");
-    this.classList.add("filter-button-on");
-    if (all_button_on) {
-      hide_all_sports_but_one(sport_type);
-      all_button.classList.remove('filter-button-on');
-    }
-    else {
-      filter_table(sport_type, false);
-    }
+    // Turn it on
+    numberOfButtonsOn += 1;
+    showSport(sport)
+    button.classList.add(class_name);
   }
-}
-
-function toggle_side_nav() {
-  var side_nav = document.getElementById('mySidenav');
-  var nav_button = document.getElementById('nav-button');
-  if (side_nav.style.display == 'none' || side_nav.style.display == '') {
-    side_nav.style.display = 'block';
-    nav_button.style.marginLeft = '220px';
-  } else {
-    nav_button.style.marginLeft = '0';
-    side_nav.style.display = 'none';
-  }
-}
-
-function hide_session_row(session_row) {
-  if(!in_array(session_row.classList, 'session-row-hidden')) {
-    session_row.classList.add('sessions-row-hidden');
-  }
-  session_row.classList.remove('sessions-row');
-}
-
-function show_session_row(session_row) {
-  session_row.classList.remove('sessions-row-hidden');
-  if(!in_array(session_row.classList, 'session-row')) {
-    session_row.classList.add('sessions-row');
-  }
-}
-
-function toggle_session_row() {
-  var table = document.getElementById('events_table');
-  var session_row = table.rows[this.rowIndex + 1];
-
-  if (in_array(session_row.classList, 'sessions-row')) {
-    hide_session_row(session_row);
-    set_event_row_triangle(this, globals.right_triangle);
-  } else {
-    show_session_row(session_row);
-    set_event_row_triangle(this, globals.down_triangle);
-  }
-}
-
-function set_event_row_triangle(event_row, new_triangle) {
-  var triangle_element = event_row.getElementsByTagName("td")[0];
-  triangle_element.innerHTML = new_triangle;
 }
 
 function in_array(array, item) {
@@ -119,123 +70,16 @@ function in_array(array, item) {
   return false;
 }
 
-function filter_table(query, hide) {
-  var table = document.getElementById("events_table");
-  var table_rows = table.rows;
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (var i = 0; i < table_rows.length; i++) {
-    var current_row = table_rows[i];
-    var td = current_row.getElementsByTagName("td")[1];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(query.toUpperCase()) > -1) {
-        if (hide) {
-          /* If the sessions for this row are expanded, hide them */
-          /* First get the 'session_row'. This is the current row + 1 */
-          var session_row = table_rows[current_row.rowIndex + 1];
-          /* We also need set the triangle */
-          set_event_row_triangle(current_row, globals.right_triangle);
-          /* Then hide the session row */
-          hide_session_row(session_row);
-          /* And then hide the row */
-          current_row.style.display = "none";
-        } else {
-          current_row.style.display = "";
-        }
-      } 
-    } 
-  }
-}
-
-// Filter out duplicate items in an array
-// http://stackoverflow.com/questions/11688692/most-elegant-way-to-create-a-list-of-unique-items-in-javascript
-
-// http://stackoverflow.com/questions/11309859/css-media-queries-and-javascript-window-width-do-not-match
-function viewport() {
-  var e = window, a = 'inner';
-  if (!('innerWidth' in window )) {
-    a = 'client';
-    e = document.documentElement || document.body;
-  }
-  return { width : e[ a+'Width' ] , height : e[ a+'Height' ] };
-}
-
-function hideSideNav() {
-  var side_nav = document.getElementById('mySidenav');
-  side_nav.classList.remove('sidenav');
-  side_nav.classList.add('sidenav_hidden');
-
-  var body = document.getElementById('page');
-  body.style.marginLeft = "20px";
-}
-
-function showSideNav() {
-  var side_nav = document.getElementById('mySidenav');
-  side_nav.classList.add('sidenav');
-  side_nav.classList.remove('sidenav_hidden');
-
-  var body = document.getElementById('page');
-  body.style.marginLeft = "220px";
-}
-
-function toggleSideNav() {
-  var side_nav = document.getElementById('mySidenav');
-
-  if (side_nav.currentStyle) {
-    var displayStyle = elem.currentStyle.display;
-  } else if (window.getComputedStyle) {
-    var displayStyle = window.getComputedStyle(side_nav, null).getPropertyValue("display");
-  }
-
-  if (displayStyle == 'none') {
-    showSideNav();
-  } else {
-    hideSideNav();
-  }
-}
-
-function hideSideNavIfMobile() {
-  var v = viewport();
-  if (v.width < 1023) {
-    hideSideNav();
-  }
-}
-
-window.onresize = function(event) {
-  var v = viewport();
-  if (v.width >= 1023) {
-    showSideNav();
-  } else {
-    hideSideNav();
-  }
-};
-
-
-// Add event listeners
-window.addEventListener("load", function(event) {
-  hideSideNavIfMobile();
-});
-
 document.addEventListener('DOMContentLoaded', function () {
-  // Add click listener to the side nav button
-  var sidenav_buttons = document.getElementsByClassName('sidenav_button');
-  for( var i = 0; i < sidenav_buttons.length; i++ ) {
-    var element = sidenav_buttons[i];
-    element.addEventListener('click', toggleSideNav);
-  }
-
-  // Add click listener to the table event rows
-  var events_table_rows = document.getElementsByClassName('events_table_row');
-  for ( var i = 0; i < events_table_rows.length; i++ ) {
-    var element = events_table_rows[i];
-    element.addEventListener('click', toggle_session_row);
-  }
-
   // Add click listener to the filter buttons
-  var filter_buttons = document.getElementsByClassName('filter-button');
-  for ( var i = 0; i < filter_buttons.length; i++ ) {
-    var element = filter_buttons[i];
-    element.addEventListener('click', toggle_button_clicked);
-  }
+  allButton = document.getElementById('all_filter_button');
+  filterButtons = document.getElementsByClassName('filter_button');
+  numberOfButtons = filterButtons.length;
+  numberOfButtonsOn = filterButtons.length;
 
+  allButton.addEventListener('click', showAll);
+
+  for (var element of filterButtons) {
+    element.addEventListener('click', filterButtonClicked);
+  }
 });

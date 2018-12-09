@@ -6,14 +6,14 @@ pub fn pretty_print_date_range(from_option: &Option<Date<Utc>>, to_option: &Opti
             format!("{month} {day_from}-{day_to}",
                     day_from = from.format("%d"),
                     day_to = to.format("%d"),
-                    month = from.format("%B"),
+                    month = from.format("%b"),
                     )
         } else if from.month() <= to.month() {
             format!("{month_from} {day_from} - {month_to} {day_to}",
                     day_from = from.format("%d"),
-                    month_from = from.format("%B"),
+                    month_from = from.format("%b"),
                     day_to = to.format("%d"),
-                    month_to = to.format("%B"),
+                    month_to = to.format("%b"),
                     )
         } else {
             let from_string = from.to_string();

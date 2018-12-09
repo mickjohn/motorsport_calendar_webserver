@@ -24,45 +24,46 @@
 </head>
 
 <body id="page">
-<h1><a class="sidenav_button" href="#">&#9776;</a></h1>
 <h1 id="main_title">Upcoming Motorsport Events</h1>
 
-<div class="content">
-  {% for event in events %}
-  <div class="event_card">
-    <div class="event_card_header">
-      <!-- Not using tags just yet -->
-      <!-- <span class="sport_tag {{event.sport|lower|replace(from=" ", to="_")}}_tag">{{ event.sport }}</span> -->
-      <span class="event_card_sport_name {{event.sport|lower|replace(from=" ", to="_")}}_name">{{ event.sport }}</span>
-      <span>{{ event.location }}</span>
-      <!-- <span>Gran Premio Heineken D'Italia</span> -->
-    </div>
-    <div class="event_card_content">
-      <!-- <p><b> {{ event.location }}</b>, {{ event.location }}, Circuit Paul Ricard</p> -->
-      <p><b>{{ event.location }}</b></p>
-      <p> {{ event | event_date_range }} </p>
-    </div>
-    <div class="event_card_footer">
-      <div class="event_card_footer_subtext"> 6 Months away </div>
-      <div class="event_card_footer_details_link"><a href="#"><b>view details</b></a></div>
-    </div>
-  </div>
+<div class="filter_buttons">
+  <h3>Filters</h3>
+  <button id="all_filter_button">all</button>
+  {% for sport_type in sport_types %}
+  {% set class = sport_type | lower | replace(from=" ", to="_") %}
+  <button class="filter_button {{ class }}_filter_button">{{ sport_type | lower }}</button>
+  <!-- <button class="filter_button">{{ sport_type | lower }}</button> -->
   {% endfor %}
 </div>
 
-<div id="mySidenav" class="sidenav">
-  <div id="sidenavFilterButtons">
-    <h2 class="side_nav_heading"> FILTERS </h2>
-    <a id="all_filter" class="filter-button filter-button-on" href="#">ALL</a>
-    {% for sport_type in sport_types %}
-    <a class="filter-button filter-button-off" href="#">{{ sport_type }}</a>
-    {% endfor %}
-  </div>
-
-  <div id="sideNavLinks">
-    <h2 class="side_nav_heading"> LINKS </h2>
-    <a class="side_link" href="static/about.html"><h3> ABOUT </h3></a>
-  </div>
+<div class="content">
+  <ul class="event_list">
+  {% for event in events %}
+  {% set class = event.sport | lower | replace(from=" ", to="_") %}
+  <li class="event_list_item {{ event.sport | lower | replace(from=" ", to="_") }}_event_list_item">
+    <span class="event_sport event_list_field {{ class }}_event_list_field">{{ event.sport }}</span>
+    <span class="event_name event_list_field {{ class }}_event_list_field">Gran Prime de Italia</span>
+    <span class="event_location event_list_field {{ class }}_event_list_field"><b>{{ event.country }},</b> {{ event.location }}</span>
+    <span class="event_dates event_list_field {{ class }}_event_list_field">{{ event | event_date_range }}</span>
+    <span class="event_countdown event_list_field {{ class }}_event_list_field">8 months</span>
+  </li>
+  {% endfor %}
+  </ul>
 </div>
+
+<!-- <div id="mySidenav" class="sidenav"> -->
+<!--   <div id="sidenavFilterButtons"> -->
+<!--     <h2 class="side_nav_heading"> FILTERS </h2> -->
+<!--     <a id="all_filter" class="filter-button filter-button-on" href="#">ALL</a> -->
+<!--     {% for sport_type in sport_types %} -->
+<!--     <a class="filter-button filter-button-off" href="#">{{ sport_type }}</a> -->
+<!--     {% endfor %} -->
+<!--   </div> -->
+
+<!--   <div id="sideNavLinks"> -->
+<!--     <h2 class="side_nav_heading"> LINKS </h2> -->
+<!--     <a class="side_link" href="static/about.html"><h3> ABOUT </h3></a> -->
+<!--   </div> -->
+<!-- </div> -->
 </body>
 </html>
