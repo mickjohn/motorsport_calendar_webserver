@@ -47,11 +47,11 @@
 
     <tbody>
     {% for event in events %}
-    {% set class = event.sport | lower | replace(from=" ", to="_") %}
+      {% set class = event.sport | lower | replace(from=" ", to="_") %}
       <tr class="{{ class }}_row">
-        <td class="{{ class }}_sport">{{ event.sport | upper }}</td>
-        <td>{{ event | event_date_range }}</td>
-        <td>{{ event.location }}</td>
+        <td class="{{ class }}_sport"><a href="/events/{{ event.id }}">{{ event.sport | upper }}</a></td>
+        <td><a href="/events/{{ event.id }}">{{ event | event_date_range }}</a></td>
+        <td><a href="/events/{{ event.id }}">{{ event.location }}</a></td>
       </tr>
     {% endfor %}
     </tbody>

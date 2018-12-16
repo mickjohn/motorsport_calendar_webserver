@@ -17,6 +17,10 @@ h1, h2, strong {
   text-align: center;
 }
 
+/******************/
+/* Filter Buttons */
+/******************/
+
 .filter_buttons {
   width: 100%; 
   max-width: 1000px;
@@ -102,6 +106,21 @@ h1, h2, strong {
   height: 60px;
   padding: 0.5em 0 0.5em 0;
   background-color: #393838;
+}
+
+.events_table > tbody > tr:hover {
+  background-color: #302f2f;
+}
+
+a,a:visited,a:link {
+  text-decoration: none;
+  color: inherit;
+}
+
+a { 
+   display: block; 
+   padding: 16px 0 16px 0;
+   margin: 0;
 }
 
 .event_row_hidden {
