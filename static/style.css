@@ -1,20 +1,12 @@
 
 html {
-  background-color: #5f6374;
+  background-color: #202020;
 }
 
-@media only screen {
-  body {
-    margin: 0 20px 0 20px;
-    font-family: "Helvetica", "Arial", sans-serif;
-    color: #2d2d2d;
-  }
-}
-
-@media only screen and (max-width: 1023px) {
-  body {
-    margin: 0 20px 0 20px;
-  }
+body {
+  margin: 0;
+  font-family: "Helvetica", "Arial", sans-serif;
+  color: #c6c1c1;
 }
 
 h1, h2, strong {
@@ -26,9 +18,23 @@ h1, h2, strong {
 }
 
 .filter_buttons {
-  width: 1340px;
-  margin: 0 auto;
-  align: center;
+  width: 100%; 
+  max-width: 1000px;
+  margin: 0 auto 1em auto;
+}
+
+/* Small screen */
+@media only screen and (max-width: 1023px) {
+  .filter_buttons h3 {
+    margin: 0.4em 0.5em 0.4em 0.4em;
+  }
+}
+
+/* Large screen */
+@media only screen and (min-width: 1022px) {
+  .filter_buttons h3 {
+    margin: 0;
+  }
 }
 
 .filter_button {
@@ -53,166 +59,81 @@ h1, h2, strong {
   margin: 0.4em 0.5em 0.4em 0.4em;
 }
 
-.formula_1_filter_button { background-color: #c26969; }
-.indycar_filter_button { background-color: #404b8d; }
-.gp2_filter_button { background-color: #00adef; }
-.formula_2_filter_button { background-color: #00adef; }
+.formula_1_filter_button { background-color: #cb3939; }
+.indycar_filter_button { background-color: #7b8dfc; }
+.gp2_filter_button { background-color: #70d7ff; }
+.formula_2_filter_button { background-color: #70d7ff; }
 .filter_button_off { background-color: grey; }
 
-/********************/
-/* Event List Items */
-/********************/
+/***************/
+/* Event Table */
+/***************/
 
-@media only screen and (min-width: 1024px) {
-  .content { }
-
-  .event_list {
+/* Small screen */
+@media only screen and (max-width: 1023px) {
+  .events_table {
+    color: #cecece;
     margin: 0 auto;
-    padding: 0;
-    width: 1340px;
+    font-size: 0.8em;
+    width: 100%;
+    max-width: 1000px;
   }
-
-  .event_list_item {
-    list-style: none;
-    border: 3px solid #cb3939;
-    margin: 20px 0;
-    font-size: 1.8em;
-    /* box-shadow: 2px 2px #888888; */
-    background-color: #ffffff;
-    border-radius: 5px;
-    display: flex;
-    background-image: linear-gradient(90deg, #cb3939, #cb3939 10px, transparent 0, transparent);
-  }
-
-  .event_list_item_hidden {
-    display: none;
-  }
-
-  .event_list_field {
-    border-right: 3px solid #cb3939;
-    padding: 0 0.4em 0 0.4em;
-  }
-
-  .event_sport { 
-    display: inline-block;
-    width: 5em;
-    padding: 0 0 0 0.8em;
-  }
-
-  .event_name { 
-    display: inline-block;
-    width: 10em;
-  }
-
-  .event_location {
-    display: inline-block;
-    width: 16em;
-  }
-  .event_dates {
-    display: inline-block;
-    width: 9em;
-  }
-
-  .event_countdown {
-    display: inline-block;
-    width: 6em;
-  }
-
-  .formula_1_event_list_item { 
-    border: 3px solid #c26969; 
-    background-image: linear-gradient(90deg, #c26969, #c26969 15px, transparent 0, transparent);
-  }
-  .formula_1_event_list_field { border-right: 3px solid #c26969; }
-
-  .indycar_event_list_item { 
-    border: 3px solid #404b8d;
-    background-image: linear-gradient(90deg, #404b8d, #404b8d 15px, transparent 0, transparent);
-  }
-  .indycar_event_list_field { border-right: 3px solid #404b8d; }
-
-  .gp2_event_list_item { 
-    border: 3px solid #00adef;
-    background-image: linear-gradient(90deg, #00adef, #00adef 15px, transparent 0, transparent);
-  }
-  .gp2_event_list_field { border-right: 3px solid #00adef; }
-
-  .formula_2_event_list_item { 
-    border: 3px solid #00adef;
-    background-image: linear-gradient(90deg, #00adef, #00adef 15px, transparent 0, transparent);
-  }
-  .formula_2_event_list_field { border-right: 3px solid #00adef; }
 }
 
-@media only screen and (max-width: 1023px) {
-  .event_list {
-    display: inline-block;
-    padding: 0;
+/* Large screen */
+@media only screen and (min-width: 1022px) {
+  .events_table {
+    color: #cecece;
+    margin: 0 auto;
+    font-size: 1.1em;
+    width: 100%;
+    max-width: 1000px;
   }
+}
 
-  .event_list_item {
-    color: #515151;
-    list-style: none;
-    border: 3px solid #cb3939;
-    margin: 20px 0;
-    font-size: 1.6em;
-    background-color: #ffffff;
-    border-radius: 5px;
-    background-image: linear-gradient(90deg, #717171, #717171 15px, transparent 0, transparent);
-  }
+.events_table > thead > tr {
+  height: 60px;
+  padding: 0.5em 0 0.5em 0;
+  background-color: #544f4f;
+  text-align: left;
+}
 
-  .event_list_item_hidden {
-    display: none;
-  }
+.events_table > tbody > tr {
+  height: 60px;
+  padding: 0.5em 0 0.5em 0;
+  background-color: #393838;
+}
 
-  .event_list_field {
-    display: block;
-  }
+.event_row_hidden {
+  display: none;
+}
 
-  .event_sport { 
-    font-weight: bold;
-    padding: 3px 5px 0 15px;
-  }
+.events_table td {
+  padding-left: 0.7em;
+  border-bottom: 2px solid #454545; 
+}
 
-  .event_name {
-    padding: 3px 0 0 15px;
-  }
-  .event_location { 
-    border-bottom: inherit;
-    padding: 3px 0 0 15px;
-  }
+.events_table th {
+  padding-left: 0.7em;
+  border-bottom: 2px solid grey; 
+}
 
-  .event_dates { 
-    display: inline;
-    font-size: 0.8em;
-    color: grey;
-    padding: 6px 25px 3px 15px;
-    border-right: inherit;
-  }
+.formula_1_sport {
+  color: #cb3939;
+  background-image: linear-gradient(90deg, #cb3939, #cb3939 3px, transparent 0, transparent);
+}
 
-  .event_countdown { 
-    display: inline;
-    font-size: 0.8em;
-    color: grey;
-    padding: 3px 0 0 15px;
-  }
+.indycar_sport { 
+  color: #7b8dfc;
+  background-image: linear-gradient(90deg, #7b8dfc, #7b8dfc 3px, transparent 0, transparent);
+}
 
-  .formula_1_event_list_item { 
-    border: 3px solid #c26969;
-    background-image: linear-gradient(90deg, #c26969, #c26969 10px, transparent 0, transparent);
-  }
+.gp2_sport { 
+  color: #70d7ff;
+  background-image: linear-gradient(90deg, #70d7ff, #70d7ff 3px, transparent 0, transparent);
+}
 
-  .indycar_event_list_item { 
-    border: 3px solid #404b8d; 
-    background-image: linear-gradient(90deg, #404b8d, #404b8d 10px, transparent 0, transparent);
-  }
-
-  .gp2_event_list_item { 
-    border: 3px solid #00adef;
-    background-image: linear-gradient(90deg, #00adef, #00adef 10px, transparent 0, transparent);
-  }
-
-  .formula_2_event_list_item { 
-    border: 3px solid #00adef; 
-    background-image: linear-gradient(90deg, #00adef, #00adef 10px, transparent 0, transparent);
-  }
+.formula_2_sport{ 
+  color: #70d7ff;
+  background-image: linear-gradient(90deg, #70d7ff, #70d7ff 3px, transparent 0, transparent);
 }

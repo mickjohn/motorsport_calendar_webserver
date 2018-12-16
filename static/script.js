@@ -16,18 +16,18 @@ function showAll(e) {
 }
 
 function showSport(sportName) { 
-  var class_name = sportName + "_event_list_item";
+  var class_name = sportName + "_row";
   var list_items = document.getElementsByClassName(class_name);
   for (var list_item of list_items) {
-    list_item.classList.remove("event_list_item_hidden");
+    list_item.classList.remove("event_row_hidden");
   }
 }
 
 function hideSport(sportName) {
-  var class_name = sportName + "_event_list_item";
+  var class_name = sportName + "_row";
   var list_items = document.getElementsByClassName(class_name);
   for (var list_item of list_items) {
-    list_item.classList.add("event_list_item_hidden");
+    list_item.classList.add("event_row_hidden");
   }
 }
 
