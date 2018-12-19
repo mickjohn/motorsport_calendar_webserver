@@ -45,7 +45,7 @@ fn template() -> content::Html<String> {
 
 #[get("/events/<event_id>")]
 fn event_template(event_id: i32) -> content::Html<String> {
-    content::Html(render_template().unwrap())
+    content::Html(render_event_template(event_id).unwrap())
 
     // match render_event_template(event_id) {
     //     Ok(rendered) => Ok(content::Html(rendered)),
@@ -76,7 +76,6 @@ pub fn run_webserver() {
         .mount("/", routes![
                static_file,
                template,
-               // template_with_offset,
                event_template,
                ])
         .register(catchers![internal_server_error])
