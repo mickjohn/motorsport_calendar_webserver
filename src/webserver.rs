@@ -3,7 +3,6 @@ use std::path::{Path, PathBuf};
 use rocket;
 use rocket::response::NamedFile;
 use rocket::response::content;
-use rocket::Error as RocketError;
 use reqwest;
 use reqwest::Client;
 use motorsport_calendar_common::event::*;
@@ -20,39 +19,42 @@ struct UtcOffsetSeconds {
 }
 
 #[get("/")]
-fn template() -> Result<content::Html<String>, RocketError> {
+fn template() -> content::Html<String> {
     let now: DateTime<Local> = Local::now();
     let offset = now.offset().fix().utc_minus_local();
-    match render_template() {
-        Ok(rendered) => Ok(content::Html(rendered)),
-        Err(e) => {
-            rlog_error!("Error getting events from API: '{}'", e); 
-            Err(RocketError::Internal)
-        },
-    }
+    content::Html(render_template().unwrap())
+    // match render_template() {
+    //     Ok(rendered) => Ok(content::Html(rendered)),
+    //     Err(e) => {
+    //         rlog_error!("Error getting events from API: '{}'", e); 
+    //         Err(RocketError::Internal)
+    //     },
+    // }
 }
 
-#[get("/?<offset>")]
-fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::Html<String>, RocketError> {
-    match render_template() {
-        Ok(rendered) => Ok(content::Html(rendered)),
-        Err(e) => {
-            rlog_error!("Error getting events from API: '{}'", e); 
-            Err(RocketError::Internal)
-        },
-    }
-}
+// #[get("/?<offset>")]
+// fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::Html<String>, RocketError> {
+//     match render_template() {
+//         Ok(rendered) => Ok(content::Html(rendered)),
+//         Err(e) => {
+//             rlog_error!("Error getting events from API: '{}'", e); 
+//             Err(RocketError::Internal)
+//         },
+//     }
+// }
 
 #[get("/events/<event_id>")]
-fn event_template(event_id: i32) -> Result<content::Html<String>, RocketError> {
-    match render_event_template(event_id) {
-        Ok(rendered) => Ok(content::Html(rendered)),
-        Err(e) => {
-            rlog_error!("Error getting events from API: '{}'", e); 
-            println!("Error getting events from API: '{}'", e); 
-            Err(RocketError::Internal)
-        },
-    }
+fn event_template(event_id: i32) -> content::Html<String> {
+    content::Html(render_template().unwrap())
+
+    // match render_event_template(event_id) {
+    //     Ok(rendered) => Ok(content::Html(rendered)),
+    //     Err(e) => {
+    //         rlog_error!("Error getting events from API: '{}'", e); 
+    //         println!("Error getting events from API: '{}'", e); 
+    //         Err(RocketError::Internal)
+    //     },
+    // }
 }
 
 
@@ -62,7 +64,7 @@ fn static_file(file: PathBuf) -> Option<NamedFile> {
     NamedFile::open(Path::new(&config.static_content_dir).join(file)).ok()
 }
 
-#[error(500)]
+#[catch(500)]
 fn internal_server_error() -> NamedFile {
     let config = config::global::CONFIG.read().unwrap();
     let fp = format!("{}/500error.html", config.static_content_dir);
@@ -74,10 +76,10 @@ pub fn run_webserver() {
         .mount("/", routes![
                static_file,
                template,
-               template_with_offset,
+               // template_with_offset,
                event_template,
                ])
-        .catch(errors![internal_server_error])
+        .register(catchers![internal_server_error])
         .launch();
 }
 

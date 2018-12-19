@@ -1,6 +1,7 @@
-#![feature(plugin)]
-#![feature(custom_derive)]
-#![plugin(rocket_codegen)]
+// #![feature(plugin)]
+// #![feature(custom_derive)]
+#![feature(custom_attribute)]
+#![feature(proc_macro_hygiene, decl_macro)]
 
 #[macro_use] extern crate log;
 extern crate env_logger;
@@ -8,7 +9,7 @@ extern crate serde;
 #[macro_use] extern crate serde_derive;
 extern crate serde_json;
 extern crate serde_yaml;
-extern crate rocket;
+#[macro_use] extern crate rocket;
 extern crate motorsport_calendar_common;
 #[macro_use] extern crate lazy_static;
 extern crate reqwest;
