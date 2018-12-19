@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/event_style.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="static/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="static/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="static/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="static/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="static/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="static/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="static/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="static/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="static/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/faviconmanifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="static/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body>
+    {% set sport_class = event.sport | lower | replace(from=" ", to="_") %}
+    <div class="content">
+      <div class="content_header {{ sport_class }}_sport">
+        <h1> {{ event.sport }} </h1>
+        <h2> Placeholder Grand Prix </h2>
+        <h3> Placeholder circuit name, {{ event.location }}, {{ event.country }} </h3>
+        <h4> Next Session in 10h 43m 11s </h4>
+
+      </div>
+      <table cellspacing="0" class="sessions_table">
+        <thead>
+          <tr>
+            <th>What</th>
+            <th>When</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for session in event.sessions %}
+          {% set session_class = session.name | split(pat=" ") | first | lower %}
+          <tr>
+            <td class="{{ session_class }}_session">{{ session.name }}</td>
+            <td>{{ session | session_date(utc_offset=0) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

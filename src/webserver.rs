@@ -43,6 +43,19 @@ fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::Html<String
     }
 }
 
+#[get("/events/<event_id>")]
+fn event_template(event_id: i32) -> Result<content::Html<String>, RocketError> {
+    match render_event_template(event_id) {
+        Ok(rendered) => Ok(content::Html(rendered)),
+        Err(e) => {
+            rlog_error!("Error getting events from API: '{}'", e); 
+            println!("Error getting events from API: '{}'", e); 
+            Err(RocketError::Internal)
+        },
+    }
+}
+
+
 #[get("/static/<file..>")]
 fn static_file(file: PathBuf) -> Option<NamedFile> {
     let config = config::global::CONFIG.read().unwrap();
@@ -62,6 +75,7 @@ pub fn run_webserver() {
                static_file,
                template,
                template_with_offset,
+               event_template,
                ])
         .catch(errors![internal_server_error])
         .launch();
@@ -102,6 +116,31 @@ fn render_template() -> Result<String, String>{
 
     let template = templates::init_template();
     let rendered_template = try!(template.render("index.html.tera", &context).map_err(|e| e.to_string()));
+    Ok(rendered_template)
+}
+
+fn render_event_template(event_id: i32) -> Result<String, String> {
+    let config = config::global::CONFIG.read().unwrap();
+    let client = Client::new().map_err(|e| e.to_string())?;
+    let url = format!("{}/{}/", &config.api_url, event_id);
+
+    let mut resp = client.get(&url).map_err(|e| e.to_string())?
+        .header(reqwest::header::ContentType::json())
+        .send().map_err(|e| e.to_string())?;
+
+    if !resp.status().is_success() {
+        return Err(format!("url {} returned non 200 status", &config.api_url));
+    }
+
+    let mut event_string = String::new();
+    try!(resp.read_to_string(&mut event_string).map_err(|e| e.to_string()));
+
+    let event: Event = serde_json::from_str(&event_string).unwrap();
+
+    let mut context = Context::new();
+    context.add("event", &event);
+    let template = templates::init_template();
+    let rendered_template = try!(template.render("event.html.tera", &context).map_err(|e| e.to_string()));
     Ok(rendered_template)
 }
 

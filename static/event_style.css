@@ -1,0 +1,137 @@
+/***********/
+/* Colours */
+/***********/
+/*
+ Formula 1  cb3939
+ Indycar    7b8dfc
+ GP2        70d7ff
+ Formula1 2 70d7ff
+*/
+
+/****************/
+/* Screen Sizes */
+/****************/
+/*
+Small screen:
+@media only screen and (max-width: 1023px)
+
+Large screen 
+@media only screen and (min-width: 1022px)
+*/
+
+html {
+  background-color: #202020;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica", "Arial", sans-serif;
+  color: #c6c1c1;
+}
+
+h1, h2, strong {
+  color: #c6c1c1;
+}
+
+.content {
+  color: #cecece;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+}
+
+/* Small screen: */
+@media only screen and (max-width: 1023px) {
+  .content {
+    font-size: 0.8em;
+  }
+}
+
+/* Large screen */ 
+@media only screen and (min-width: 1022px) {
+  .content {
+    font-size: 1.3em;
+  }
+}
+
+.content h1 {
+  color: #cecece;
+}
+
+.sessions_table {
+  color: #cecece;
+  margin: 0 auto;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.sessions_table > thead > tr {
+  height: 60px;
+  padding: 0.5em 0 0.5em 0;
+  background-color: #544f4f;
+}
+
+.sessions_table > tbody > tr {
+  height: 60px;
+  padding: 0.5em 0 0.5em 0;
+  background-color: #393838;
+}
+
+.sessions_table > tbody > tr:hover {
+  background-color: #302f2f;
+}
+
+.sessions_table td {
+  padding-left: 0.7em;
+  border-bottom: 1px solid #333232; 
+}
+
+.sessions_table th {
+  padding-left: 0.7em;
+  border-bottom: 2px solid grey; 
+}
+
+/*******************/
+/* Session Colours */
+/*******************/
+
+.practice_session {
+  color: #4286f4;
+  background-image: linear-gradient(90deg, #4286f4, #4286f4 3px, transparent 0, transparent);
+}
+
+.qualifying_session {
+  color: #70ed9e;
+  background-image: linear-gradient(90deg, #70ed9e, #70ed9e 3px, transparent 0, transparent);
+}
+
+.warmup_session {
+  color: #ed7c71;
+  background-image: linear-gradient(90deg, #ed7c71, #ed7c71 3px, transparent 0, transparent);
+}
+
+.race_session {
+  color: #f45041;
+  background-image: linear-gradient(90deg, #f45041, #f45041 3px, transparent 0, transparent);
+}
+
+/*****************/
+/* Sport Colours */
+/*****************/
+
+.formula_1_sport h1 {
+  color: #cb3939;
+}
+
+.indycar_sport h1 { 
+  color: #7b8dfc;
+}
+
+.gp2_sport h1 { 
+  color: #70d7ff;
+}
+
+.formula_2_sport h1 { 
+  color: #70d7ff;
+}

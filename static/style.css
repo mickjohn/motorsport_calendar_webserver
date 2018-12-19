@@ -137,6 +137,10 @@ a {
   border-bottom: 2px solid grey; 
 }
 
+/*****************/
+/* Sport Colours */
+/*****************/
+
 .formula_1_sport {
   color: #cb3939;
   background-image: linear-gradient(90deg, #cb3939, #cb3939 3px, transparent 0, transparent);
