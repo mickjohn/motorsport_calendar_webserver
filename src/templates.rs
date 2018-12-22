@@ -43,12 +43,12 @@ pub fn session_date_helper(value: tera::Value, params: HashMap<String, tera::Val
             _ => None,
         };
         if let Some(i32_offset) = o {
-            utils::pretty_print_session_date_and_time_with_offset(&session.date, &session.time, &i32_offset)
+            utils::pretty_print_session_date_and_time_with_offset(&session.time.unwrap(), &session.time, &i32_offset)
         } else {
-            utils::pretty_print_session_date_and_time(&session.date, &session_time)
+            utils::pretty_print_session_date_and_time(&session.time.unwrap(), &session_time)
         }
     } else {
-        utils::pretty_print_session_date_and_time(&session.date, &session_time)
+        utils::pretty_print_session_date_and_time(&session.time.unwrap(), &session_time)
     };
     Ok(tera::to_value(&s).unwrap())
 }

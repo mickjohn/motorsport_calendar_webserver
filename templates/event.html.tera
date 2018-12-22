@@ -27,8 +27,8 @@
     <div class="content">
       <div class="content_header {{ sport_class }}_sport">
         <h1> {{ event.sport }} </h1>
-        <h2> Placeholder Grand Prix </h2>
-        <h3> Placeholder circuit name, {{ event.location }}, {{ event.country }} </h3>
+        <h2> {{ event.title }} </h2>
+        <h3> {{ event.track }}, {{ event.location }}, {{ event.country }} </h3>
         <h4> Next Session in 10h 43m 11s </h4>
 
       </div>
