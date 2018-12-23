@@ -1,21 +1,21 @@
-use std::io::Read;
-use std::path::{Path, PathBuf};
-use rocket;
-use rocket::response::NamedFile;
-use rocket::response::content;
-use reqwest;
-use reqwest::Client;
-use motorsport_calendar_common::event::*;
-use config;
-use tera::Context;
-use serde_json;
-use templates;
 use chrono::prelude::*;
 use chrono::Duration;
+use config;
+use motorsport_calendar_common::event::*;
+use reqwest;
+use reqwest::Client;
+use rocket;
+use rocket::response::content;
+use rocket::response::NamedFile;
+use serde_json;
+use std::io::Read;
+use std::path::{Path, PathBuf};
+use templates;
+use tera::Context;
 
 #[derive(FromForm)]
 struct UtcOffsetSeconds {
-    offset: i32
+    offset: i32,
 }
 
 #[get("/")]
@@ -26,7 +26,7 @@ fn template() -> content::Html<String> {
     // match render_template() {
     //     Ok(rendered) => Ok(content::Html(rendered)),
     //     Err(e) => {
-    //         rlog_error!("Error getting events from API: '{}'", e); 
+    //         rlog_error!("Error getting events from API: '{}'", e);
     //         Err(RocketError::Internal)
     //     },
     // }
@@ -37,7 +37,7 @@ fn template() -> content::Html<String> {
 //     match render_template() {
 //         Ok(rendered) => Ok(content::Html(rendered)),
 //         Err(e) => {
-//             rlog_error!("Error getting events from API: '{}'", e); 
+//             rlog_error!("Error getting events from API: '{}'", e);
 //             Err(RocketError::Internal)
 //         },
 //     }
@@ -50,13 +50,12 @@ fn event_template(event_id: i32) -> content::Html<String> {
     // match render_event_template(event_id) {
     //     Ok(rendered) => Ok(content::Html(rendered)),
     //     Err(e) => {
-    //         rlog_error!("Error getting events from API: '{}'", e); 
-    //         println!("Error getting events from API: '{}'", e); 
+    //         rlog_error!("Error getting events from API: '{}'", e);
+    //         println!("Error getting events from API: '{}'", e);
     //         Err(RocketError::Internal)
     //     },
     // }
 }
-
 
 #[get("/static/<file..>")]
 fn static_file(file: PathBuf) -> Option<NamedFile> {
@@ -73,11 +72,7 @@ fn internal_server_error() -> NamedFile {
 
 pub fn run_webserver() {
     rocket::ignite()
-        .mount("/", routes![
-               static_file,
-               template,
-               event_template,
-               ])
+        .mount("/", routes![static_file, template, event_template,])
         .register(catchers![internal_server_error])
         .launch();
 }
@@ -86,10 +81,12 @@ fn make_api_request() -> Result<Vec<Event>, String> {
     let config = config::global::CONFIG.read().unwrap();
     rlog_debug!("config = {:?}", *config);
 
-    let client = Client::new().map_err(|e| e.to_string())?;
-    let mut resp = client.get(&config.api_url).map_err(|e| e.to_string())?
-        .header(reqwest::header::ContentType::json())
-        .send().map_err(|e| e.to_string())?;
+    let client = Client::new();
+    let mut resp = client
+        .get(&config.api_url)
+        .header(reqwest::header::CONTENT_TYPE, "json")
+        .send()
+        .map_err(|e| e.to_string())?;
 
     if !resp.status().is_success() {
         return Err(format!("url {} returned non 200 status", &config.api_url));
@@ -100,63 +97,78 @@ fn make_api_request() -> Result<Vec<Event>, String> {
     rlog_debug!("repsonse from {} = {}", &config.api_url, s);
 
     let mut events: Vec<Event> = serde_json::from_str(&s).unwrap();
-    events.sort_by(|a,b| a.get_start_date().cmp(&b.get_start_date()));
+    events.sort_by(|a, b| a.get_start_date().cmp(&b.get_start_date()));
     rlog_debug!("deserialized and sorted events = {:?}", events);
     Ok(events)
 }
 
 // fn render_template(offset: i32) -> Result<String, String>{
-fn render_template() -> Result<String, String>{
+fn render_template() -> Result<String, String> {
     let mut context = Context::new();
     let events = try!(make_api_request());
     // Don't display event's that are over a day old.
     let events_older_than_yesterday = get_events_older_than_yesterday(events);
     context.add("events", &events_older_than_yesterday);
-    context.add("sport_types", &get_sport_types(&events_older_than_yesterday));
+    context.add(
+        "sport_types",
+        &get_sport_types(&events_older_than_yesterday),
+    );
     // context.add("offset", &offset);
 
     let template = templates::init_template();
-    let rendered_template = try!(template.render("index.html.tera", &context).map_err(|e| e.to_string()));
+    let rendered_template = try!(template
+        .render("index.html.tera", &context)
+        .map_err(|e| e.to_string()));
     Ok(rendered_template)
 }
 
 fn render_event_template(event_id: i32) -> Result<String, String> {
     let config = config::global::CONFIG.read().unwrap();
-    let client = Client::new().map_err(|e| e.to_string())?;
+    let client = Client::new();
     let url = format!("{}/{}/", &config.api_url, event_id);
 
-    let mut resp = client.get(&url).map_err(|e| e.to_string())?
-        .header(reqwest::header::ContentType::json())
-        .send().map_err(|e| e.to_string())?;
+    let mut resp = client
+        .get(&url)
+        .header(reqwest::header::CONTENT_TYPE, "json")
+        .send()
+        .map_err(|e| e.to_string())?;
 
     if !resp.status().is_success() {
         return Err(format!("url {} returned non 200 status", &config.api_url));
     }
 
     let mut event_string = String::new();
-    try!(resp.read_to_string(&mut event_string).map_err(|e| e.to_string()));
+    try!(resp
+        .read_to_string(&mut event_string)
+        .map_err(|e| e.to_string()));
 
     let event: Event = serde_json::from_str(&event_string).unwrap();
 
     let mut context = Context::new();
     context.add("event", &event);
     let template = templates::init_template();
-    let rendered_template = try!(template.render("event.html.tera", &context).map_err(|e| e.to_string()));
+    let rendered_template = try!(template
+        .render("event.html.tera", &context)
+        .map_err(|e| e.to_string()));
     Ok(rendered_template)
 }
 
 fn get_events_older_than_yesterday(events: Vec<Event>) -> Vec<Event> {
     rlog_debug!("About to filter events older than one day");
     let now: DateTime<Utc> = Utc::now();
-    let one_day = Duration::seconds(60*60*24);
-    events.into_iter()
+    let one_day = Duration::seconds(60 * 60 * 24);
+    events
+        .into_iter()
         .filter(|x| x.get_end_date().is_some())
         // .filter(|x| { now.signed_duration_since(x.get_end_date().unwrap().and_hms(0,0,0)) <= one_day })
         .collect::<Vec<Event>>()
 }
 
 fn get_sport_types(events: &[Event]) -> Vec<&str> {
-    let mut sport_types = events.iter().map(|e| e.sport.as_str()).collect::<Vec<&str>>();
+    let mut sport_types = events
+        .iter()
+        .map(|e| e.sport.as_str())
+        .collect::<Vec<&str>>();
     sport_types.sort();
     sport_types.dedup();
     sport_types
