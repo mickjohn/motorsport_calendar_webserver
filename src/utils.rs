@@ -44,24 +44,24 @@ pub fn pretty_print_session_date_and_time(timeoption: &Option<NaiveDateTime>) ->
 #[cfg(test)]
 mod tests {
     use super::*;
-    use chrono::{TimeZone, Utc};
+    use chrono::NaiveDate;
 
     #[test]
     fn test_pretty_print_date_range() {
         {
-            let from = Utc.ymd(2017, 3, 23).and_hms(0, 0, 0);
-            let to = Utc.ymd(2017, 3, 25).and_hms(0, 0, 0);
+            let from = Some(NaiveDate::from_ymd(2017, 3, 23));
+            let to = Some(NaiveDate::from_ymd(2017, 3, 25));
             assert_eq!(
                 pretty_print_date_range(&from, &to),
-                String::from("March 23-25")
+                String::from("Mar 23-25")
             );
         }
         {
-            let from = Utc.ymd(2017, 4, 30).and_hms(0, 0, 0);
-            let to = Utc.ymd(2017, 5, 2).and_hms(0, 0, 0);
+            let from = Some(NaiveDate::from_ymd(2017, 4, 30));
+            let to = Some(NaiveDate::from_ymd(2017, 5, 2));
             assert_eq!(
                 pretty_print_date_range(&from, &to),
-                String::from("April 30 - May 02")
+                String::from("Apr 30 - May 02")
             );
         }
     }
