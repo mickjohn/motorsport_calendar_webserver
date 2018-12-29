@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet" href="static/style.css">
-<script src="static/script.js"></script>
-<link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="static/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="static/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="static/favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="static/favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="static/favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="static/favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="static/favicon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="static/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="static/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
-<link rel="manifest" href="/static/faviconmanifest.json">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="static/favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-</head>
+  <head>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="static/script.js"></script>
+    <link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="static/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="static/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="static/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="static/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="static/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="static/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="static/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="static/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="static/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/faviconmanifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="static/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
 
-<body id="page">
-<h1 id="main_title">Upcoming Motorsport Events</h1>
+  <body id="page">
+    <h1 id="main_title">Upcoming Motorsport Events</h1>
 
-<div class="filter_buttons">
-  <h3>Filters</h3>
-  <button id="all_filter_button">all</button>
-  {% for sport_type in sport_types %}
-  {% set class = sport_type | lower | replace(from=" ", to="_") %}
-  <button class="filter_button {{ class }}_filter_button">{{ sport_type | lower }}</button>
-  {% endfor %}
-</div>
+    <div class="filter_buttons">
+      <h3>Filters</h3>
+      <button id="all_filter_button">all</button>
+      {% for sport_type in sport_types %}
+      {% set class = sport_type | lower | replace(from=" ", to="_") %}
+      <button class="filter_button {{ class }}_filter_button">{{ sport_type | lower }}</button>
+      {% endfor %}
+    </div>
 
-<div class="content">
-  <table cellspacing="0" class="events_table">
-    <thead>
-      <tr>
-        <th> Sport </th>
-        <th> When </th>
-        <th> Where </th>
-      </tr>
-    </thead>
+    <div class="content">
+      <table cellspacing="0" class="events_table">
+        <thead>
+          <tr>
+            <th> Sport </th>
+            <th> When </th>
+            <th> Where </th>
+          </tr>
+        </thead>
 
-    <tbody>
-    {% for event in events %}
-      {% set class = event.sport | lower | replace(from=" ", to="_") %}
-      <tr class="{{ class }}_row">
-        <td class="{{ class }}_sport"><a href="/events/{{ event.id }}">{{ event.sport | upper }}</a></td>
-        <td><a href="/events/{{ event.id }}">{{ event | event_date_range }}</a></td>
-        <td><a href="/events/{{ event.id }}">{{ event.location }}</a></td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-</div>
-</body>
+        <tbody>
+          {% for event in events %}
+          {% set class = event.sport | lower | replace(from=" ", to="_") %}
+          <tr class="{{ class }}_row">
+            <td class="{{ class }}_sport"><a href="/events/{{ event.id }}">{{ event.sport | upper }}</a></td>
+            <td><a href="/events/{{ event.id }}">{{ event | event_date_range }}</a></td>
+            <td><a href="/events/{{ event.id }}">{{ event.location }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <footer>
+      <a href="/static/about.html"> About </a>
+    </footer>
+  </body>
 </html>

@@ -13,48 +13,14 @@ use std::path::{Path, PathBuf};
 use templates;
 use tera::Context;
 
-#[derive(FromForm)]
-struct UtcOffsetSeconds {
-    offset: i32,
-}
-
 #[get("/")]
 fn template() -> content::Html<String> {
-    let now: DateTime<Local> = Local::now();
-    let offset = now.offset().fix().utc_minus_local();
     content::Html(render_template().unwrap())
-    // match render_template() {
-    //     Ok(rendered) => Ok(content::Html(rendered)),
-    //     Err(e) => {
-    //         rlog_error!("Error getting events from API: '{}'", e);
-    //         Err(RocketError::Internal)
-    //     },
-    // }
 }
-
-// #[get("/?<offset>")]
-// fn template_with_offset(offset: UtcOffsetSeconds) -> Result<content::Html<String>, RocketError> {
-//     match render_template() {
-//         Ok(rendered) => Ok(content::Html(rendered)),
-//         Err(e) => {
-//             rlog_error!("Error getting events from API: '{}'", e);
-//             Err(RocketError::Internal)
-//         },
-//     }
-// }
 
 #[get("/events/<event_id>")]
 fn event_template(event_id: i32) -> content::Html<String> {
     content::Html(render_event_template(event_id).unwrap())
-
-    // match render_event_template(event_id) {
-    //     Ok(rendered) => Ok(content::Html(rendered)),
-    //     Err(e) => {
-    //         rlog_error!("Error getting events from API: '{}'", e);
-    //         println!("Error getting events from API: '{}'", e);
-    //         Err(RocketError::Internal)
-    //     },
-    // }
 }
 
 #[get("/static/<file..>")]
@@ -108,8 +74,8 @@ fn render_template() -> Result<String, String> {
     let events = try!(make_api_request());
     // Don't display event's that are over a day old.
     let events_older_than_yesterday = get_events_older_than_yesterday(events);
-    context.add("events", &events_older_than_yesterday);
-    context.add(
+    context.insert("events", &events_older_than_yesterday);
+    context.insert(
         "sport_types",
         &get_sport_types(&events_older_than_yesterday),
     );
@@ -145,7 +111,7 @@ fn render_event_template(event_id: i32) -> Result<String, String> {
     let event: Event = serde_json::from_str(&event_string).unwrap();
 
     let mut context = Context::new();
-    context.add("event", &event);
+    context.insert("event", &event);
     let template = templates::init_template();
     let rendered_template = try!(template
         .render("event.html.tera", &context)

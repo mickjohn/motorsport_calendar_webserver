@@ -1,8 +1,8 @@
-use chrono::{Date, DateTime, Datelike, FixedOffset, Local, Utc};
+use chrono::{NaiveDateTime, NaiveDate, Datelike};
 
 pub fn pretty_print_date_range(
-    from_option: &Option<Date<Utc>>,
-    to_option: &Option<Date<Utc>>,
+    from_option: &Option<NaiveDate>,
+    to_option: &Option<NaiveDate>,
 ) -> String {
     if let (&Some(ref from), &Some(ref to)) = (from_option, to_option) {
         if from.month() == to.month() {
@@ -30,38 +30,16 @@ pub fn pretty_print_date_range(
     }
 }
 
-pub fn pretty_print_session_date_and_time(
-    date: &DateTime<Utc>,
-    timeoption: &Option<DateTime<Local>>,
-) -> String {
-    let day = date.format("%A").to_string();
+pub fn pretty_print_session_date_and_time(timeoption: &Option<NaiveDateTime>) -> String {
     if let &Some(time) = timeoption {
+        let day = time.format("%A").to_string();
         let hm = time.format("%H:%M").to_string();
         format!("{}, {}", day, hm)
     } else {
-        format!("{}, <i>TBD</i>", day)
+        format!("<i>TBD</i>")
     }
 }
 
-pub fn pretty_print_session_date_and_time_with_offset(
-    date: &DateTime<Utc>,
-    timeoption: &Option<DateTime<Utc>>,
-    offset: &i32,
-) -> String {
-    let day = date.format("%A").to_string();
-    if let &Some(time) = timeoption {
-        let fs = if *offset >= 0 {
-            FixedOffset::east(*offset)
-        } else {
-            FixedOffset::west(*offset)
-        };
-        let new_time = time.with_timezone(&fs);
-        let hm = new_time.format("%H:%M").to_string();
-        format!("{}, {}", day, hm)
-    } else {
-        format!("{}, <i>TBD</i>", day)
-    }
-}
 
 #[cfg(test)]
 mod tests {

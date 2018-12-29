@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="/static/event_script.js"></script>
     <link rel="stylesheet" href="/static/event_style.css">
     <link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="static/favicon/apple-icon-60x60.png">
@@ -29,7 +30,8 @@
         <h1> {{ event.sport }} </h1>
         <h2> {{ event.title }} </h2>
         <h3> {{ event.track }}, {{ event.location }}, {{ event.country }} </h3>
-        <h4> Next Session in 10h 43m 11s </h4>
+        <h3> {{ event | event_date_range }} </h3>
+        <h4 id="next-session-countdown"></h4>
 
       </div>
       <table cellspacing="0" class="sessions_table">
@@ -44,7 +46,8 @@
           {% set session_class = session.name | split(pat=" ") | first | lower %}
           <tr>
             <td class="{{ session_class }}_session">{{ session.name }}</td>
-            <td>{{ session | session_date(utc_offset=0) }}</td>
+            <td class="session-time">{{ session | session_date(utc_offset=0) }} UTC</td>
+            <td class="hidden-time">{{ session.time }}+00:00</td>
           </tr>
           {% endfor %}
         </tbody>
