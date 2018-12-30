@@ -85,6 +85,7 @@ footer a {
 .indycar_filter_button { background-color: #7b8dfc; }
 .gp2_filter_button { background-color: #70d7ff; }
 .formula_2_filter_button { background-color: #70d7ff; }
+.formula_3_filter_button { background-color: #bfbf3f; }
 .filter_button_off { background-color: grey; }
 
 /***************/
@@ -174,7 +175,12 @@ a {
   background-image: linear-gradient(90deg, #70d7ff, #70d7ff 3px, transparent 0, transparent);
 }
 
-.formula_2_sport{ 
+.formula_2_sport { 
   color: #70d7ff;
   background-image: linear-gradient(90deg, #70d7ff, #70d7ff 3px, transparent 0, transparent);
+}
+
+.formula_3_sport {
+  color: #bfbf3f;
+  background-image: linear-gradient(90deg, #bfbf3f, #bfbf3f 3px, transparent 0, transparent);
 }
