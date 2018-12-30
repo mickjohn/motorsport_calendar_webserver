@@ -27,10 +27,10 @@
     {% set sport_class = event.sport | lower | replace(from=" ", to="_") %}
     <div class="content">
       <div class="content_header {{ sport_class }}_sport">
-        <h1> {{ event.sport }} </h1>
-        <h2> {{ event.title }} </h2>
-        <h3> {{ event.track }}, {{ event.location }}, {{ event.country }} </h3>
-        <h3> {{ event | event_date_range }} </h3>
+        <h1> {{ event.sport | escape }} </h1>
+        <h2> {{ event.title | escape }} </h2>
+        <h3> {{ event | event_date_range }}, {{ event.track | escape }}, {{ event.location | escape }}, {{ event.country | escape }} </h3>
+        <!-- <h3> {{ event | event_date_range }} </h3> -->
         <h4 id="next-session-countdown"></h4>
         <h5> Times are converted to your local timezone </h5>
 
@@ -44,11 +44,11 @@
         </thead>
         <tbody>
           {% for session in event.sessions %}
-          {% set session_class = session.name | split(pat=" ") | first | lower %}
+          {% set session_class = session.name | escape | split(pat=" ") | first | lower %}
           <tr>
-            <td class="{{ session_class }}_session">{{ session.name }}</td>
+            <td class="{{ session_class }}_session">{{ session.name | escape }}</td>
             <td class="session-time">{{ session | session_date(utc_offset=0) }} UTC</td>
-            <td class="hidden-time">{{ session.time }}+00:00</td>
+            <td class="hidden-time">{{ session.time | escape }}+00:00</td>
           </tr>
           {% endfor %}
         </tbody>

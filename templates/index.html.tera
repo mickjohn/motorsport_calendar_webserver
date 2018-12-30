@@ -30,7 +30,7 @@
       <h3>Filters</h3>
       <button id="all_filter_button">all</button>
       {% for sport_type in sport_types %}
-      {% set class = sport_type | lower | replace(from=" ", to="_") %}
+      {% set class = sport_type | escape | lower | replace(from=" ", to="_") %}
       <button class="filter_button {{ class }}_filter_button">{{ sport_type | lower }}</button>
       {% endfor %}
     </div>
@@ -47,11 +47,11 @@
 
         <tbody>
           {% for event in events %}
-          {% set class = event.sport | lower | replace(from=" ", to="_") %}
+          {% set class = event.sport | escape | lower | replace(from=" ", to="_") %}
           <tr class="{{ class }}_row">
-            <td class="{{ class }}_sport"><a href="/events/{{ event.id }}">{{ event.sport | upper }}</a></td>
+            <td class="{{ class }}_sport"><a href="/events/{{ event.id }}">{{ event.sport | escape | upper }}</a></td>
             <td><a href="/events/{{ event.id }}">{{ event | event_date_range }}</a></td>
-            <td><a href="/events/{{ event.id }}">{{ event.location }}</a></td>
+            <td><a href="/events/{{ event.id }}">{{ event.location | escape }}</a></td>
           </tr>
           {% endfor %}
         </tbody>

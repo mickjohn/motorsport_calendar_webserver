@@ -1,11 +1,19 @@
+html {
+  background-color: #202020;
+}
+
 body {
   margin: 0 auto;
   max-width: 50%;
   font-family: "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
   padding: 4em 1em;
-  color: #555;
+  color: #c6c1c1;
   font-size: 1.1em;
+}
+
+a,a:visited,a:link {
+  color: inherit;
 }
 
 @media only screen and (max-width: 1023px) {
