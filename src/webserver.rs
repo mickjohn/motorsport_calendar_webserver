@@ -121,12 +121,12 @@ fn render_event_template(event_id: i32) -> Result<String, String> {
 
 fn get_events_older_than_yesterday(events: Vec<Event>) -> Vec<Event> {
     rlog_debug!("About to filter events older than one day");
-    let now: DateTime<Utc> = Utc::now();
+    let now  = Utc::now().naive_utc();
     let one_day = Duration::seconds(60 * 60 * 24);
     events
         .into_iter()
         .filter(|x| x.get_end_date().is_some())
-        // .filter(|x| { now.signed_duration_since(x.get_end_date().unwrap().and_hms(0,0,0)) <= one_day })
+        .filter(|x| { now.signed_duration_since(x.get_end_date().unwrap().and_hms(0,0,0)) <= one_day })
         .collect::<Vec<Event>>()
 }
 
