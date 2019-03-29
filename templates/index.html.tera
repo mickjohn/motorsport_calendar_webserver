@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <title> mickjohn </title>
     <link rel="stylesheet" href="static/style.css">
     <script src="static/script.js"></script>
     <link rel="apple-touch-icon" sizes="57x57" href="static/favicon/apple-icon-57x57.png">

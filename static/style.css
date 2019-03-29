@@ -72,7 +72,7 @@ footer a {
 
 #all_filter_button {
   font-size: 1em;
-  color: white;
+  color: #141414;
   background-color: red;
   border: none;
   border-radius: 0.6em;
@@ -82,10 +82,10 @@ footer a {
 }
 
 .formula_1_filter_button { background-color: #cb3939; }
-.indycar_filter_button { background-color: #7b8dfc; }
+.indycar_filter_button { background-color: #7b8dfc; color: #141414; }
 .gp2_filter_button { background-color: #70d7ff; }
 .formula_2_filter_button { background-color: #70d7ff; }
-.formula_3_filter_button { background-color: #bfbf3f; }
+.formula_3_filter_button { background-color: #bfbf3f; color: #141414; }
 .filter_button_off { background-color: grey; }
 
 /***************/
