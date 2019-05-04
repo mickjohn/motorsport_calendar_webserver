@@ -170,11 +170,6 @@ a {
   background-image: linear-gradient(90deg, #7b8dfc, #7b8dfc 3px, transparent 0, transparent);
 }
 
-.gp2_sport { 
-  color: #70d7ff;
-  background-image: linear-gradient(90deg, #70d7ff, #70d7ff 3px, transparent 0, transparent);
-}
-
 .formula_2_sport { 
   color: #70d7ff;
   background-image: linear-gradient(90deg, #70d7ff, #70d7ff 3px, transparent 0, transparent);
@@ -183,4 +178,9 @@ a {
 .formula_3_sport {
   color: #bfbf3f;
   background-image: linear-gradient(90deg, #bfbf3f, #bfbf3f 3px, transparent 0, transparent);
+}
+
+.dtm_sport {
+  color: #bf723f;
+  background-image: linear-gradient(90deg, #bf723f, #bf723f 3px, transparent 0, transparent);
 }
