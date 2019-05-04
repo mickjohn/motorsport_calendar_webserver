@@ -45,17 +45,18 @@
         <tbody>
           {% for session in event.sessions %}
           {# {% set session_class = session.name | escape | split(pat=" ") | first | lower %} #}
-          {% if session.name | lower is containing("practice") %}
+          {% set session_name = session.name | lower %}
+          {% if session_name is containing("practice") %}
             {% set session_class = "practice" %}
-          {% elif session.name | lower is containing("qualifying") %}
+          {% elif session_name is containing("qualifying") %}
             {% set session_class = "qualifying" %}
-          {% elif session.name | lower is containing("warmup") %}
+          {% elif session_name is containing("warmup") %}
             {% set session_class = "warmup" %}
-          {% elif session.name | lower is containing("race") %}
+          {% elif session_name is containing("race") %}
             {% set session_class = "race" %}
           {% else%}
             {% set session_class = "practice" %}
-          {% end if %}
+          {% endif %}
           <tr>
             <td class="{{ session_class }}_session">{{ session.name | escape }}</td>
             <td class="session-time">{{ session | session_date(utc_offset=0) }} UTC</td>
